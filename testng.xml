@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ReqRes Test Suite" parallel="methods">
+    <test name="Get Request Tests">
+        <classes>
+            <class name="io.github.mfaisalkhatri.api.reqres.tests.ApiTests">
+                <methods>
+                    <include name="testGetAPI"/>
+                    <include name="testPostAPI"/>
+                    <include name="testPutAPI"/>
+                    <include name="testPatchAPI"/>
+                    <include name="testDeleteAPI"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite> <!-- Suite -->
