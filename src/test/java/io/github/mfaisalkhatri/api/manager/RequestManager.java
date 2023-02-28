@@ -1,4 +1,4 @@
-package io.github.mfaisalkhatri.api.reqres.requests;
+package io.github.mfaisalkhatri.api.manager;
 
 import java.util.Map;
 
@@ -58,6 +58,7 @@ public class RequestManager {
 
     public APIResponse patchRequest (String endpoint, RequestOptions options) {
         return apiRequestContext.patch (endpoint, options);
+
     }
 
     public APIResponse deleteRequest (String endpoint) {

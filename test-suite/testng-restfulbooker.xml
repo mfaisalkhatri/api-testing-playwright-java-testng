@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Restful Booker Test Suite">
+    <test name="End to End Booking Tests">
+        <classes>
+            <class name="io.github.mfaisalkhatri.api.restfulbooker.tests.RestfulBookerEndToEndTests">
+                <methods>
+                    <include name="createBookingTest"/>
+                    <include name="getBookingTest"/>
+                    <include name="generateTokenTest"/>
+                    <include name="updateBookingTest"/>
+                    <include name="updatePartialBookingTest"/>
+                    <include name="deleteBookingTest"/>
+                    <include name="testBookingDeleted"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite> <!-- Suite -->

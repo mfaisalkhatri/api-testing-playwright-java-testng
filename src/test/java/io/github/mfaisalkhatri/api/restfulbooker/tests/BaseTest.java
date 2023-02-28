@@ -1,11 +1,11 @@
-package io.github.mfaisalkhatri.api.reqres.tests;
+package io.github.mfaisalkhatri.api.restfulbooker.tests;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import io.github.mfaisalkhatri.api.manager.RequestManager;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 /**
  * @author Faisal Khatri
@@ -15,17 +15,18 @@ public class BaseTest {
 
     protected RequestManager manager;
 
-    @BeforeClass
-    public void setup () {
+    @BeforeTest
+    public void setupBase () {
         manager = new RequestManager ();
         manager.createPlaywright ();
-        String baseUrl = "https://reqres.in";
+        final String baseUrl = "https://restful-booker.herokuapp.com/";
         Map<String, String> headers = new HashMap<> ();
         headers.put ("content-type", "application/json");
+        headers.put ("Accept", "application/json");
         manager.setApiRequestContext (baseUrl, headers);
     }
 
-    @AfterClass
+    @AfterTest
     public void tearDown () {
         manager.disposeAPIRequestContext ();
         manager.closePlaywright ();
