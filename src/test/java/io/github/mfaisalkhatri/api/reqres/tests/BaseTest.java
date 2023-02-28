@@ -3,7 +3,7 @@ package io.github.mfaisalkhatri.api.reqres.tests;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.github.mfaisalkhatri.api.reqres.requests.RequestManager;
+import io.github.mfaisalkhatri.api.manager.RequestManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 

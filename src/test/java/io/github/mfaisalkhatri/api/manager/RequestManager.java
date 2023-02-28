@@ -1,4 +1,4 @@
-package io.github.mfaisalkhatri.api.reqres.requests;
+package io.github.mfaisalkhatri.api.manager;
 
 import java.util.Map;
 
