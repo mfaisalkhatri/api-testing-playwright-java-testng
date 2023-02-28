@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeClass;
 public class BaseTest {
 
     protected RequestManager manager;
+
     @BeforeClass
     public void setup () {
         manager = new RequestManager ();
@@ -21,11 +22,11 @@ public class BaseTest {
         String baseUrl = "https://reqres.in";
         Map<String, String> headers = new HashMap<> ();
         headers.put ("content-type", "application/json");
-        manager.setApiRequestContext (baseUrl,headers);
+        manager.setApiRequestContext (baseUrl, headers);
     }
 
     @AfterClass
-    public void tearDown() {
+    public void tearDown () {
         manager.disposeAPIRequestContext ();
         manager.closePlaywright ();
     }

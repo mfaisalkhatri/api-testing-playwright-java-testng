@@ -36,9 +36,9 @@ public class BookingDataBuilder {
 
     public static PartialBookingData getPartialBookingData () {
         return PartialBookingData.builder ()
-            .firstName (FAKER.name ()
+            .firstname (FAKER.name ()
                 .firstName ())
-            .totalPrice (FAKER.number ()
+            .totalprice (FAKER.number ()
                 .numberBetween (100, 5000))
             .build ();
     }

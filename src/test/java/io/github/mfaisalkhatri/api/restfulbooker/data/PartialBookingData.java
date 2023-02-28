@@ -10,6 +10,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class PartialBookingData {
-    String firstName;
-    int    totalPrice;
+    String firstname;
+    int    totalprice;
 }

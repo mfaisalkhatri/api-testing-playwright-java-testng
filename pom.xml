@@ -37,11 +37,6 @@
             <version>${testng-version}</version>
         </dependency>
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <version>${hamcrest-all-version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>${org-json-verion}</version>

@@ -1,6 +1,7 @@
 package io.github.mfaisalkhatri.api.restfulbooker.tests;
 
 import static io.github.mfaisalkhatri.api.restfulbooker.data.BookingDataBuilder.getBookingData;
+import static io.github.mfaisalkhatri.api.restfulbooker.data.BookingDataBuilder.getPartialBookingData;
 import static io.github.mfaisalkhatri.api.restfulbooker.data.TokenBuilder.getToken;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -8,6 +9,7 @@ import static org.testng.Assert.assertNotNull;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.options.RequestOptions;
 import io.github.mfaisalkhatri.api.restfulbooker.data.BookingData;
+import io.github.mfaisalkhatri.api.restfulbooker.data.PartialBookingData;
 import io.github.mfaisalkhatri.api.restfulbooker.data.Tokencreds;
 import org.json.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -90,8 +92,6 @@ public class RestfulBookerEndToEndTests extends BaseTest {
         assertEquals (updateBookingData.getBookingdates ()
             .getCheckout (), bookingDatesObject.get ("checkout"));
         assertEquals (updateBookingData.getAdditionalneeds (), responseObject.get ("additionalneeds"));
-
-
     }
 
     @Test
@@ -105,5 +105,34 @@ public class RestfulBookerEndToEndTests extends BaseTest {
         assertNotNull (tokenValue);
         token = tokenValue;
 
+    }
+
+    @Test
+    public void updatePartialBookingTest () {
+        PartialBookingData partialBookingData = getPartialBookingData ();
+
+        APIResponse response = manager.patchRequest ("/booking/" + bookingId, RequestOptions.create ()
+            .setData (partialBookingData)
+            .setHeader ("Cookie", "token=" + token));
+
+        assertEquals (response.status (), 200);
+        JSONObject responseObject = new JSONObject (response.text ());
+
+        assertEquals (partialBookingData.getFirstname (), responseObject.get ("firstname"));
+        assertEquals (partialBookingData.getTotalprice (), responseObject.get ("totalprice"));
+    }
+
+    @Test
+    public void deleteBookingTest () {
+        APIResponse response = manager.deleteRequest ("/booking/" + bookingId, RequestOptions.create ()
+            .setHeader ("Cookie", "token=" + token));
+
+        assertEquals (response.status (), 201);
+    }
+
+    @Test
+    public void testBookingDeleted () {
+        APIResponse response = manager.getRequest ("/booking/" + bookingId);
+        assertEquals (response.status (), 404);
     }
 }
