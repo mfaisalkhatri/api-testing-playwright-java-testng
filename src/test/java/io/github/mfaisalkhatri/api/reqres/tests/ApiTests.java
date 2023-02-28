@@ -20,9 +20,7 @@ public class ApiTests extends BaseTest {
         APIResponse response = manager.getRequest ("/api/users/4");
         assertEquals (response.status (), 200);
 
-        String responseText = response.text ();
-
-        JSONObject jsonObject = new JSONObject (responseText);
+        JSONObject jsonObject = new JSONObject (response.text ());
         JSONObject dataObject = jsonObject.getJSONObject ("data");
 
         assertEquals (dataObject.get ("email")
