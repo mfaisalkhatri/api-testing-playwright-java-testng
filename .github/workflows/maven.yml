@@ -14,6 +14,12 @@ on:
       - master
       - issue-*
 
+permissions:
+    statuses: write
+    checks: write
+    contents: write
+    pull-requests: write
+
 jobs:
   build:
     name: Build and Test  
