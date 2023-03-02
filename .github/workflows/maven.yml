@@ -31,17 +31,19 @@ jobs:
     - name: Start restful booker service
       run: docker-compose -f ./docker-compose-restfulbooker.yml up -d
 
-    - name: Build with Maven and run tests
-      run: mvn clean install
+    - name: Build Project
+      run: mvn clean install -Dskiptests
+
+    - name: Run tests
+      run: mvn clean test
 
     - name: Stop restful booker service
       run: docker-compose -f ./docker-compose-restfulbooker.yml down --remove-orphans
 
-    - name: Test Report
-      uses: dorny/test-reporter@v1
+    - name: Test Reporter
+      uses: dorny/test-reporter@v1.6.0
       if: always()
       with:
         name: Test Results
-        path: ${{ github.workspace }}/target/surefire-reports/TEST-TestSuite.xml
+        path: target/surefire-reports/*.xml
         reporter: java-junit
-        java-version: 11
