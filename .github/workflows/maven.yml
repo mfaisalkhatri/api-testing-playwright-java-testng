@@ -32,7 +32,7 @@ jobs:
       run: docker-compose -f ./docker-compose-restfulbooker.yml up -d
 
     - name: Build Project
-      run: mvn clean install -Dskiptests
+      run: mvn clean install -DskipTests
 
     - name: Run tests
       run: mvn clean test
@@ -45,5 +45,5 @@ jobs:
       if: always()
       with:
         name: Test Results
-        path: target/surefire-reports/*.xml
+        path: target/surefire-reports/TEST-TestSuite.xml
         reporter: java-junit
