@@ -19,7 +19,7 @@ public class BaseTest {
     public void setupBase () {
         manager = new RequestManager ();
         manager.createPlaywright ();
-        final String baseUrl = "http://localhost:3001/";
+        final String baseUrl = "http://localhost:3001";
         Map<String, String> headers = new HashMap<> ();
         headers.put ("content-type", "application/json");
         headers.put ("Accept", "application/json");
