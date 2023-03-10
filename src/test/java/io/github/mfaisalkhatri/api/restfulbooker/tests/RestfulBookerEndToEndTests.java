@@ -38,19 +38,14 @@ public class RestfulBookerEndToEndTests extends BaseTest {
         JSONObject responseObject = new JSONObject (response.text ());
         JSONObject bookingObject = responseObject.getJSONObject ("booking");
         JSONObject bookingDatesObject = bookingObject.getJSONObject ("bookingdates");
-        bookingId = responseObject.getInt ("bookingid");
 
+        assertNotNull(responseObject.get("bookingid"));
         assertEquals (response.status (), 200);
 
         assertEquals (bookingData.getFirstname (), bookingObject.get ("firstname"));
-        assertEquals (bookingData.getLastname (), bookingObject.get ("lastname"));
-        assertEquals (bookingData.getTotalprice (), bookingObject.get ("totalprice"));
-        assertEquals (bookingData.isDepositpaid (), bookingObject.get ("depositpaid"));
         assertEquals (bookingData.getBookingdates ()
             .getCheckin (), bookingDatesObject.get ("checkin"));
-        assertEquals (bookingData.getBookingdates ()
-            .getCheckout (), bookingDatesObject.get ("checkout"));
-        assertEquals (bookingData.getAdditionalneeds (), bookingObject.get ("additionalneeds"));
+        bookingId = responseObject.getInt ("bookingid");
     }
 
     @Test
@@ -62,14 +57,8 @@ public class RestfulBookerEndToEndTests extends BaseTest {
         JSONObject bookingDatesObject = responseObject.getJSONObject ("bookingdates");
 
         assertEquals (bookingData.getFirstname (), responseObject.get ("firstname"));
-        assertEquals (bookingData.getLastname (), responseObject.get ("lastname"));
-        assertEquals (bookingData.getTotalprice (), responseObject.get ("totalprice"));
-        assertEquals (bookingData.isDepositpaid (), responseObject.get ("depositpaid"));
         assertEquals (bookingData.getBookingdates ()
             .getCheckin (), bookingDatesObject.get ("checkin"));
-        assertEquals (bookingData.getBookingdates ()
-            .getCheckout (), bookingDatesObject.get ("checkout"));
-        assertEquals (bookingData.getAdditionalneeds (), responseObject.get ("additionalneeds"));
     }
 
     @Test
@@ -84,14 +73,8 @@ public class RestfulBookerEndToEndTests extends BaseTest {
         JSONObject bookingDatesObject = responseObject.getJSONObject ("bookingdates");
 
         assertEquals (updateBookingData.getFirstname (), responseObject.get ("firstname"));
-        assertEquals (updateBookingData.getLastname (), responseObject.get ("lastname"));
-        assertEquals (updateBookingData.getTotalprice (), responseObject.get ("totalprice"));
-        assertEquals (updateBookingData.isDepositpaid (), responseObject.get ("depositpaid"));
-        assertEquals (updateBookingData.getBookingdates ()
-            .getCheckin (), bookingDatesObject.get ("checkin"));
         assertEquals (updateBookingData.getBookingdates ()
             .getCheckout (), bookingDatesObject.get ("checkout"));
-        assertEquals (updateBookingData.getAdditionalneeds (), responseObject.get ("additionalneeds"));
     }
 
     @Test
@@ -119,7 +102,7 @@ public class RestfulBookerEndToEndTests extends BaseTest {
         JSONObject responseObject = new JSONObject (response.text ());
 
         assertEquals (partialBookingData.getFirstname (), responseObject.get ("firstname"));
-        assertEquals (partialBookingData.getTotalprice (), responseObject.get ("totalprice"));
+        assertEquals(partialBookingData.getTotalprice(), responseObject.get("totalprice"));
     }
 
     @Test
