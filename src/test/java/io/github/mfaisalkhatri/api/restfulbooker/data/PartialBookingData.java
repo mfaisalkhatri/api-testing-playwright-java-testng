@@ -11,5 +11,5 @@ import lombok.Getter;
 @Builder
 public class PartialBookingData {
     String firstname;
-    int    totalprice;
+    int totalprice;
 }
