@@ -14,67 +14,67 @@ import com.microsoft.playwright.options.RequestOptions;
  **/
 public class RequestManager {
 
-    private Playwright        playwright;
+    private Playwright playwright;
     private APIRequestContext apiRequestContext;
 
-    public void createPlaywright () {
-        playwright = Playwright.create ();
+    public void createPlaywright() {
+        playwright = Playwright.create();
 
     }
 
-    public void setApiRequestContext (String baseUrl, Map<String, String> headers) {
-        apiRequestContext = playwright.request ()
-            .newContext (new APIRequest.NewContextOptions ().setBaseURL (baseUrl)
-                .setExtraHTTPHeaders (headers));
+    public void setApiRequestContext(String baseUrl, Map<String, String> headers) {
+        apiRequestContext = playwright.request()
+                .newContext(new APIRequest.NewContextOptions().setBaseURL(baseUrl)
+                        .setExtraHTTPHeaders(headers));
     }
 
-    public APIResponse getRequest (String endpoint) {
-        return apiRequestContext.get (endpoint);
+    public APIResponse getRequest(String endpoint) {
+        return apiRequestContext.get(endpoint);
     }
 
-    public APIResponse getRequest (String endpoint, RequestOptions options) {
-        return apiRequestContext.get (endpoint, options);
+    public APIResponse getRequest(String endpoint, RequestOptions options) {
+        return apiRequestContext.get(endpoint, options);
     }
 
-    public APIResponse postRequest (String endpoint) {
-        return apiRequestContext.post (endpoint);
+    public APIResponse postRequest(String endpoint) {
+        return apiRequestContext.post(endpoint);
     }
 
-    public APIResponse postRequest (String endpoint, RequestOptions options) {
-        return apiRequestContext.post (endpoint, options);
+    public APIResponse postRequest(String endpoint, RequestOptions options) {
+        return apiRequestContext.post(endpoint, options);
     }
 
-    public APIResponse putRequest (String endpoint) {
-        return apiRequestContext.put (endpoint);
+    public APIResponse putRequest(String endpoint) {
+        return apiRequestContext.put(endpoint);
     }
 
-    public APIResponse putRequest (String endpoint, RequestOptions options) {
-        return apiRequestContext.put (endpoint, options);
+    public APIResponse putRequest(String endpoint, RequestOptions options) {
+        return apiRequestContext.put(endpoint, options);
     }
 
-    public APIResponse patchRequest (String endpoint) {
-        return apiRequestContext.patch (endpoint);
+    public APIResponse patchRequest(String endpoint) {
+        return apiRequestContext.patch(endpoint);
     }
 
-    public APIResponse patchRequest (String endpoint, RequestOptions options) {
-        return apiRequestContext.patch (endpoint, options);
+    public APIResponse patchRequest(String endpoint, RequestOptions options) {
+        return apiRequestContext.patch(endpoint, options);
 
     }
 
-    public APIResponse deleteRequest (String endpoint) {
-        return apiRequestContext.delete (endpoint);
+    public APIResponse deleteRequest(String endpoint) {
+        return apiRequestContext.delete(endpoint);
     }
 
-    public APIResponse deleteRequest (String endpoint, RequestOptions options) {
-        return apiRequestContext.delete (endpoint, options);
+    public APIResponse deleteRequest(String endpoint, RequestOptions options) {
+        return apiRequestContext.delete(endpoint, options);
     }
 
-    public void disposeAPIRequestContext () {
-        apiRequestContext.dispose ();
+    public void disposeAPIRequestContext() {
+        apiRequestContext.dispose();
     }
 
-    public void closePlaywright () {
-        playwright.close ();
+    public void closePlaywright() {
+        playwright.close();
     }
 
 }

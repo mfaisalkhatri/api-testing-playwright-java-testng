@@ -16,18 +16,18 @@ public class BaseTest {
     protected RequestManager manager;
 
     @BeforeClass
-    public void setup () {
-        manager = new RequestManager ();
-        manager.createPlaywright ();
+    public void setup() {
+        manager = new RequestManager();
+        manager.createPlaywright();
         String baseUrl = "https://reqres.in";
-        Map<String, String> headers = new HashMap<> ();
-        headers.put ("content-type", "application/json");
-        manager.setApiRequestContext (baseUrl, headers);
+        Map<String, String> headers = new HashMap<>();
+        headers.put("content-type", "application/json");
+        manager.setApiRequestContext(baseUrl, headers);
     }
 
     @AfterClass
-    public void tearDown () {
-        manager.disposeAPIRequestContext ();
-        manager.closePlaywright ();
+    public void tearDown() {
+        manager.disposeAPIRequestContext();
+        manager.closePlaywright();
     }
 }

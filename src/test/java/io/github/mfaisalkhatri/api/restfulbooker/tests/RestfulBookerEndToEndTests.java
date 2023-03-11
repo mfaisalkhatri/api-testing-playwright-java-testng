@@ -21,101 +21,102 @@ import org.testng.annotations.Test;
  **/
 public class RestfulBookerEndToEndTests extends BaseTest {
 
-    private int         bookingId;
+    private int bookingId;
     private BookingData bookingData;
-    private String      token;
+    private String token;
 
     @BeforeClass
-    public void setupTest () {
-        bookingData = getBookingData ();
+    public void setupTest() {
+        bookingData = getBookingData();
     }
 
     @Test
-    public void createBookingTest () {
-        APIResponse response = manager.postRequest ("/booking", RequestOptions.create ()
-            .setData (bookingData));
+    public void createBookingTest() {
+        APIResponse response = manager.postRequest("/booking", RequestOptions.create()
+                .setData(bookingData));
 
-        JSONObject responseObject = new JSONObject (response.text ());
-        JSONObject bookingObject = responseObject.getJSONObject ("booking");
-        JSONObject bookingDatesObject = bookingObject.getJSONObject ("bookingdates");
+        assertEquals(response.status(), 200);
 
+        JSONObject responseObject = new JSONObject(response.text());
         assertNotNull(responseObject.get("bookingid"));
-        assertEquals (response.status (), 200);
 
-        assertEquals (bookingData.getFirstname (), bookingObject.get ("firstname"));
-        assertEquals (bookingData.getBookingdates ()
-            .getCheckin (), bookingDatesObject.get ("checkin"));
-        bookingId = responseObject.getInt ("bookingid");
+        JSONObject bookingObject = responseObject.getJSONObject("booking");
+        JSONObject bookingDatesObject = bookingObject.getJSONObject("bookingdates");
+        assertEquals(bookingData.getFirstname(), bookingObject.get("firstname"));
+        assertEquals(bookingData.getBookingdates()
+                .getCheckin(), bookingDatesObject.get("checkin"));
+        bookingId = responseObject.getInt("bookingid");
     }
 
     @Test
-    public void getBookingTest () {
-        APIResponse response = manager.getRequest ("/booking/" + bookingId);
-        assertEquals (response.status (), 200);
+    public void getBookingTest() {
+        APIResponse response = manager.getRequest("/booking/" + bookingId);
+        assertEquals(response.status(), 200);
 
-        JSONObject responseObject = new JSONObject (response.text ());
-        JSONObject bookingDatesObject = responseObject.getJSONObject ("bookingdates");
+        JSONObject responseObject = new JSONObject(response.text());
+        JSONObject bookingDatesObject = responseObject.getJSONObject("bookingdates");
 
-        assertEquals (bookingData.getFirstname (), responseObject.get ("firstname"));
-        assertEquals (bookingData.getBookingdates ()
-            .getCheckin (), bookingDatesObject.get ("checkin"));
+        assertEquals(bookingData.getFirstname(), responseObject.get("firstname"));
+        assertEquals(bookingData.getBookingdates()
+                .getCheckin(), bookingDatesObject.get("checkin"));
     }
 
     @Test
-    public void updateBookingTest () {
-        BookingData updateBookingData = getBookingData ();
-        APIResponse response = manager.putRequest ("/booking/" + bookingId, RequestOptions.create ()
-            .setData (updateBookingData)
-            .setHeader ("Cookie", "token=" + token));
-        assertEquals (response.status (), 200);
+    public void updateBookingTest() {
+        BookingData updateBookingData = getBookingData();
+        APIResponse response = manager.putRequest("/booking/" + bookingId, RequestOptions.create()
+                .setData(updateBookingData)
+                .setHeader("Cookie", "token=" + token));
+        assertEquals(response.status(), 200);
 
-        JSONObject responseObject = new JSONObject (response.text ());
-        JSONObject bookingDatesObject = responseObject.getJSONObject ("bookingdates");
+        JSONObject responseObject = new JSONObject(response.text());
+        JSONObject bookingDatesObject = responseObject.getJSONObject("bookingdates");
 
-        assertEquals (updateBookingData.getFirstname (), responseObject.get ("firstname"));
-        assertEquals (updateBookingData.getBookingdates ()
-            .getCheckout (), bookingDatesObject.get ("checkout"));
+        assertEquals(updateBookingData.getFirstname(), responseObject.get("firstname"));
+        assertEquals(updateBookingData.getBookingdates()
+                .getCheckout(), bookingDatesObject.get("checkout"));
     }
 
     @Test
-    public void generateTokenTest () {
-        Tokencreds tokenData = getToken ();
-        APIResponse response = manager.postRequest ("/auth", RequestOptions.create ()
-            .setData (tokenData));
-        assertEquals (response.status (), 200);
-        JSONObject responseObject = new JSONObject (response.text ());
-        String tokenValue = responseObject.getString ("token");
-        assertNotNull (tokenValue);
+    public void generateTokenTest() {
+        Tokencreds tokenData = getToken();
+        APIResponse response = manager.postRequest("/auth", RequestOptions.create()
+                .setData(tokenData));
+        assertEquals(response.status(), 200);
+
+        JSONObject responseObject = new JSONObject(response.text());
+        String tokenValue = responseObject.getString("token");
+        assertNotNull(tokenValue);
         token = tokenValue;
 
     }
 
     @Test
-    public void updatePartialBookingTest () {
-        PartialBookingData partialBookingData = getPartialBookingData ();
+    public void updatePartialBookingTest() {
+        PartialBookingData partialBookingData = getPartialBookingData();
 
-        APIResponse response = manager.patchRequest ("/booking/" + bookingId, RequestOptions.create ()
-            .setData (partialBookingData)
-            .setHeader ("Cookie", "token=" + token));
+        APIResponse response = manager.patchRequest("/booking/" + bookingId, RequestOptions.create()
+                .setData(partialBookingData)
+                .setHeader("Cookie", "token=" + token));
 
-        assertEquals (response.status (), 200);
-        JSONObject responseObject = new JSONObject (response.text ());
+        assertEquals(response.status(), 200);
+        JSONObject responseObject = new JSONObject(response.text());
 
-        assertEquals (partialBookingData.getFirstname (), responseObject.get ("firstname"));
+        assertEquals(partialBookingData.getFirstname(), responseObject.get("firstname"));
         assertEquals(partialBookingData.getTotalprice(), responseObject.get("totalprice"));
     }
 
     @Test
-    public void deleteBookingTest () {
-        APIResponse response = manager.deleteRequest ("/booking/" + bookingId, RequestOptions.create ()
-            .setHeader ("Cookie", "token=" + token));
+    public void deleteBookingTest() {
+        APIResponse response = manager.deleteRequest("/booking/" + bookingId, RequestOptions.create()
+                .setHeader("Cookie", "token=" + token));
 
-        assertEquals (response.status (), 201);
+        assertEquals(response.status(), 201);
     }
 
     @Test
-    public void testBookingDeleted () {
-        APIResponse response = manager.getRequest ("/booking/" + bookingId);
-        assertEquals (response.status (), 404);
+    public void testBookingDeleted() {
+        APIResponse response = manager.getRequest("/booking/" + bookingId);
+        assertEquals(response.status(), 404);
     }
 }

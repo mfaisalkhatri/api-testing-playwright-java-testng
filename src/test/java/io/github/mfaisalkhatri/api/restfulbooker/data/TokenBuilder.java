@@ -6,10 +6,10 @@ package io.github.mfaisalkhatri.api.restfulbooker.data;
  **/
 public class TokenBuilder {
 
-    public static Tokencreds getToken () {
-        return Tokencreds.builder ()
-            .username ("admin")
-            .password ("password123")
-            .build ();
+    public static Tokencreds getToken() {
+        return Tokencreds.builder()
+                .username("admin")
+                .password("password123")
+                .build();
     }
 }

@@ -16,19 +16,19 @@ public class BaseTest {
     protected RequestManager manager;
 
     @BeforeTest
-    public void setupBase () {
-        manager = new RequestManager ();
-        manager.createPlaywright ();
+    public void setupBase() {
+        manager = new RequestManager();
+        manager.createPlaywright();
         final String baseUrl = "http://localhost:3001";
-        Map<String, String> headers = new HashMap<> ();
-        headers.put ("content-type", "application/json");
-        headers.put ("Accept", "application/json");
-        manager.setApiRequestContext (baseUrl, headers);
+        Map<String, String> headers = new HashMap<>();
+        headers.put("content-type", "application/json");
+        headers.put("Accept", "application/json");
+        manager.setApiRequestContext(baseUrl, headers);
     }
 
     @AfterTest
-    public void tearDown () {
-        manager.disposeAPIRequestContext ();
-        manager.closePlaywright ();
+    public void tearDown() {
+        manager.disposeAPIRequestContext();
+        manager.closePlaywright();
     }
 }
