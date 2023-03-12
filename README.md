@@ -1,5 +1,6 @@
 ![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Java CI with Maven](https://github.com/mfaisalkhatri/api-testing-playwright-java-testng/actions/workflows/maven.yml/badge.svg)](https://github.com/mfaisalkhatri/api-testing-playwright-java-testng/actions/workflows/maven.yml)
 
 ## Don't forget to give a :star: to make the project popular.
 
@@ -25,7 +26,6 @@ You will get the answers to the following questions and its respective working c
 - How to handle the `authentication` requests?
 - How to verify the Response Body?
 - How to verify the Response Status Code?
-- How to verify the Response headers?
 - How to extract value from Response Body?
 - How to create `POJO` for passing values to request body?
 - How to use `Lombok` to generate `Getters` and `Setters`?
@@ -35,6 +35,7 @@ You will get the answers to the following questions and its respective working c
 
 ## :writing_hand: Blog Links
 - [What is API Testing?](https://mfaisalkhatri.github.io/2020/08/08/apitesting/)
+- [How to perform End to End API Testing using Playwright with Java and TestNG](https://medium.com/@iamfaisalkhatri/how-to-perform-end-to-end-api-testing-using-playwright-with-java-and-testng-26b318927115)
 
 ## :question: Need Assistance?
 
