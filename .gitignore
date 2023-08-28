@@ -10,3 +10,5 @@
 /allure-results/
 /allure-report/
 /.allure/
+/.DS_Store
+/*.iml

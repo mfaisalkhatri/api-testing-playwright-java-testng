@@ -2,7 +2,6 @@ package io.github.mfaisalkhatri.api.reqres.data;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Faisal Khatri

@@ -1,12 +1,12 @@
 package io.github.mfaisalkhatri.api.manager;
 
-import java.util.Map;
-
 import com.microsoft.playwright.APIRequest;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.RequestOptions;
+
+import java.util.Map;
 
 /**
  * @author Faisal Khatri
@@ -18,63 +18,63 @@ public class RequestManager {
     private APIRequestContext apiRequestContext;
 
     public void createPlaywright() {
-        playwright = Playwright.create();
+        this.playwright = Playwright.create();
 
     }
 
-    public void setApiRequestContext(String baseUrl, Map<String, String> headers) {
-        apiRequestContext = playwright.request()
+    public void setApiRequestContext(final String baseUrl, final Map<String, String> headers) {
+        this.apiRequestContext = this.playwright.request()
                 .newContext(new APIRequest.NewContextOptions().setBaseURL(baseUrl)
                         .setExtraHTTPHeaders(headers));
     }
 
-    public APIResponse getRequest(String endpoint) {
-        return apiRequestContext.get(endpoint);
+    public APIResponse getRequest(final String endpoint) {
+        return this.apiRequestContext.get(endpoint);
     }
 
-    public APIResponse getRequest(String endpoint, RequestOptions options) {
-        return apiRequestContext.get(endpoint, options);
+    public APIResponse getRequest(final String endpoint, final RequestOptions options) {
+        return this.apiRequestContext.get(endpoint, options);
     }
 
-    public APIResponse postRequest(String endpoint) {
-        return apiRequestContext.post(endpoint);
+    public APIResponse postRequest(final String endpoint) {
+        return this.apiRequestContext.post(endpoint);
     }
 
-    public APIResponse postRequest(String endpoint, RequestOptions options) {
-        return apiRequestContext.post(endpoint, options);
+    public APIResponse postRequest(final String endpoint, final RequestOptions options) {
+        return this.apiRequestContext.post(endpoint, options);
     }
 
-    public APIResponse putRequest(String endpoint) {
-        return apiRequestContext.put(endpoint);
+    public APIResponse putRequest(final String endpoint) {
+        return this.apiRequestContext.put(endpoint);
     }
 
-    public APIResponse putRequest(String endpoint, RequestOptions options) {
-        return apiRequestContext.put(endpoint, options);
+    public APIResponse putRequest(final String endpoint, final RequestOptions options) {
+        return this.apiRequestContext.put(endpoint, options);
     }
 
-    public APIResponse patchRequest(String endpoint) {
-        return apiRequestContext.patch(endpoint);
+    public APIResponse patchRequest(final String endpoint) {
+        return this.apiRequestContext.patch(endpoint);
     }
 
-    public APIResponse patchRequest(String endpoint, RequestOptions options) {
-        return apiRequestContext.patch(endpoint, options);
+    public APIResponse patchRequest(final String endpoint, final RequestOptions options) {
+        return this.apiRequestContext.patch(endpoint, options);
 
     }
 
-    public APIResponse deleteRequest(String endpoint) {
-        return apiRequestContext.delete(endpoint);
+    public APIResponse deleteRequest(final String endpoint) {
+        return this.apiRequestContext.delete(endpoint);
     }
 
-    public APIResponse deleteRequest(String endpoint, RequestOptions options) {
-        return apiRequestContext.delete(endpoint, options);
+    public APIResponse deleteRequest(final String endpoint, final RequestOptions options) {
+        return this.apiRequestContext.delete(endpoint, options);
     }
 
     public void disposeAPIRequestContext() {
-        apiRequestContext.dispose();
+        this.apiRequestContext.dispose();
     }
 
     public void closePlaywright() {
-        playwright.close();
+        this.playwright.close();
     }
 
 }
