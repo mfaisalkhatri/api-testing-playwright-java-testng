@@ -9,7 +9,7 @@ import net.datafaker.Faker;
 public class EmployeeDataBuilder {
 
     public static EmployeeData getEmployeeData() {
-        Faker faker = new Faker();
+        final Faker faker = new Faker();
         return EmployeeData.builder()
                 .name(faker.name()
                         .firstName())

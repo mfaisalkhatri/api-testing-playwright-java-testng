@@ -1,11 +1,11 @@
 package io.github.mfaisalkhatri.api.reqres.tests;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import io.github.mfaisalkhatri.api.manager.RequestManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Faisal Khatri
@@ -17,17 +17,17 @@ public class BaseTest {
 
     @BeforeClass
     public void setup() {
-        manager = new RequestManager();
-        manager.createPlaywright();
-        String baseUrl = "https://reqres.in";
-        Map<String, String> headers = new HashMap<>();
+        this.manager = new RequestManager();
+        this.manager.createPlaywright();
+        final String baseUrl = "https://reqres.in";
+        final Map<String, String> headers = new HashMap<>();
         headers.put("content-type", "application/json");
-        manager.setApiRequestContext(baseUrl, headers);
+        this.manager.setApiRequestContext(baseUrl, headers);
     }
 
     @AfterClass
     public void tearDown() {
-        manager.disposeAPIRequestContext();
-        manager.closePlaywright();
+        this.manager.disposeAPIRequestContext();
+        this.manager.closePlaywright();
     }
 }

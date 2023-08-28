@@ -17,18 +17,18 @@ public class BaseTest {
 
     @BeforeTest
     public void setupBase() {
-        manager = new RequestManager();
-        manager.createPlaywright();
+        this.manager = new RequestManager();
+        this.manager.createPlaywright();
         final String baseUrl = "http://localhost:3001";
-        Map<String, String> headers = new HashMap<>();
+        final Map<String, String> headers = new HashMap<>();
         headers.put("content-type", "application/json");
         headers.put("Accept", "application/json");
-        manager.setApiRequestContext(baseUrl, headers);
+        this.manager.setApiRequestContext(baseUrl, headers);
     }
 
     @AfterTest
     public void tearDown() {
-        manager.disposeAPIRequestContext();
-        manager.closePlaywright();
+        this.manager.disposeAPIRequestContext();
+        this.manager.closePlaywright();
     }
 }

@@ -1,11 +1,5 @@
 package io.github.mfaisalkhatri.api.restfulbooker.tests;
 
-import static io.github.mfaisalkhatri.api.restfulbooker.data.BookingDataBuilder.getBookingData;
-import static io.github.mfaisalkhatri.api.restfulbooker.data.BookingDataBuilder.getPartialBookingData;
-import static io.github.mfaisalkhatri.api.restfulbooker.data.TokenBuilder.getToken;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.options.RequestOptions;
 import io.github.mfaisalkhatri.api.restfulbooker.data.BookingData;
@@ -14,6 +8,12 @@ import io.github.mfaisalkhatri.api.restfulbooker.data.Tokencreds;
 import org.json.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import static io.github.mfaisalkhatri.api.restfulbooker.data.BookingDataBuilder.getBookingData;
+import static io.github.mfaisalkhatri.api.restfulbooker.data.BookingDataBuilder.getPartialBookingData;
+import static io.github.mfaisalkhatri.api.restfulbooker.data.TokenBuilder.getToken;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 /**
  * @author Faisal Khatri
@@ -27,50 +27,50 @@ public class RestfulBookerEndToEndTests extends BaseTest {
 
     @BeforeClass
     public void setupTest() {
-        bookingData = getBookingData();
+        this.bookingData = getBookingData();
     }
 
     @Test
     public void createBookingTest() {
-        APIResponse response = manager.postRequest("/booking", RequestOptions.create()
-                .setData(bookingData));
+        final APIResponse response = this.manager.postRequest("/booking", RequestOptions.create()
+                .setData(this.bookingData));
 
         assertEquals(response.status(), 200);
 
-        JSONObject responseObject = new JSONObject(response.text());
+        final JSONObject responseObject = new JSONObject(response.text());
         assertNotNull(responseObject.get("bookingid"));
 
-        JSONObject bookingObject = responseObject.getJSONObject("booking");
-        JSONObject bookingDatesObject = bookingObject.getJSONObject("bookingdates");
-        assertEquals(bookingData.getFirstname(), bookingObject.get("firstname"));
-        assertEquals(bookingData.getBookingdates()
+        final JSONObject bookingObject = responseObject.getJSONObject("booking");
+        final JSONObject bookingDatesObject = bookingObject.getJSONObject("bookingdates");
+        assertEquals(this.bookingData.getFirstname(), bookingObject.get("firstname"));
+        assertEquals(this.bookingData.getBookingdates()
                 .getCheckin(), bookingDatesObject.get("checkin"));
-        bookingId = responseObject.getInt("bookingid");
+        this.bookingId = responseObject.getInt("bookingid");
     }
 
     @Test
     public void getBookingTest() {
-        APIResponse response = manager.getRequest("/booking/" + bookingId);
+        final APIResponse response = this.manager.getRequest("/booking/" + this.bookingId);
         assertEquals(response.status(), 200);
 
-        JSONObject responseObject = new JSONObject(response.text());
-        JSONObject bookingDatesObject = responseObject.getJSONObject("bookingdates");
+        final JSONObject responseObject = new JSONObject(response.text());
+        final JSONObject bookingDatesObject = responseObject.getJSONObject("bookingdates");
 
-        assertEquals(bookingData.getFirstname(), responseObject.get("firstname"));
-        assertEquals(bookingData.getBookingdates()
+        assertEquals(this.bookingData.getFirstname(), responseObject.get("firstname"));
+        assertEquals(this.bookingData.getBookingdates()
                 .getCheckin(), bookingDatesObject.get("checkin"));
     }
 
     @Test
     public void updateBookingTest() {
-        BookingData updateBookingData = getBookingData();
-        APIResponse response = manager.putRequest("/booking/" + bookingId, RequestOptions.create()
+        final BookingData updateBookingData = getBookingData();
+        final APIResponse response = this.manager.putRequest("/booking/" + this.bookingId, RequestOptions.create()
                 .setData(updateBookingData)
-                .setHeader("Cookie", "token=" + token));
+                .setHeader("Cookie", "token=" + this.token));
         assertEquals(response.status(), 200);
 
-        JSONObject responseObject = new JSONObject(response.text());
-        JSONObject bookingDatesObject = responseObject.getJSONObject("bookingdates");
+        final JSONObject responseObject = new JSONObject(response.text());
+        final JSONObject bookingDatesObject = responseObject.getJSONObject("bookingdates");
 
         assertEquals(updateBookingData.getFirstname(), responseObject.get("firstname"));
         assertEquals(updateBookingData.getBookingdates()
@@ -79,28 +79,28 @@ public class RestfulBookerEndToEndTests extends BaseTest {
 
     @Test
     public void generateTokenTest() {
-        Tokencreds tokenData = getToken();
-        APIResponse response = manager.postRequest("/auth", RequestOptions.create()
+        final Tokencreds tokenData = getToken();
+        final APIResponse response = this.manager.postRequest("/auth", RequestOptions.create()
                 .setData(tokenData));
         assertEquals(response.status(), 200);
 
-        JSONObject responseObject = new JSONObject(response.text());
-        String tokenValue = responseObject.getString("token");
+        final JSONObject responseObject = new JSONObject(response.text());
+        final String tokenValue = responseObject.getString("token");
         assertNotNull(tokenValue);
-        token = tokenValue;
+        this.token = tokenValue;
 
     }
 
     @Test
     public void updatePartialBookingTest() {
-        PartialBookingData partialBookingData = getPartialBookingData();
+        final PartialBookingData partialBookingData = getPartialBookingData();
 
-        APIResponse response = manager.patchRequest("/booking/" + bookingId, RequestOptions.create()
+        final APIResponse response = this.manager.patchRequest("/booking/" + this.bookingId, RequestOptions.create()
                 .setData(partialBookingData)
-                .setHeader("Cookie", "token=" + token));
+                .setHeader("Cookie", "token=" + this.token));
 
         assertEquals(response.status(), 200);
-        JSONObject responseObject = new JSONObject(response.text());
+        final JSONObject responseObject = new JSONObject(response.text());
 
         assertEquals(partialBookingData.getFirstname(), responseObject.get("firstname"));
         assertEquals(partialBookingData.getTotalprice(), responseObject.get("totalprice"));
@@ -108,15 +108,15 @@ public class RestfulBookerEndToEndTests extends BaseTest {
 
     @Test
     public void deleteBookingTest() {
-        APIResponse response = manager.deleteRequest("/booking/" + bookingId, RequestOptions.create()
-                .setHeader("Cookie", "token=" + token));
+        final APIResponse response = this.manager.deleteRequest("/booking/" + this.bookingId, RequestOptions.create()
+                .setHeader("Cookie", "token=" + this.token));
 
         assertEquals(response.status(), 201);
     }
 
     @Test
     public void testBookingDeleted() {
-        APIResponse response = manager.getRequest("/booking/" + bookingId);
+        final APIResponse response = this.manager.getRequest("/booking/" + this.bookingId);
         assertEquals(response.status(), 404);
     }
 }
