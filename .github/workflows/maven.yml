@@ -35,7 +35,7 @@ jobs:
         cache: maven
         
     - name: Start restful booker service
-      run: docker-compose -f ./docker-compose-restfulbooker.yml up -d
+      run: docker compose -f ./docker-compose-restfulbooker.yml up -d
 
     - name: Build Project
       run: mvn clean install -DskipTests
@@ -44,7 +44,7 @@ jobs:
       run: mvn clean test
 
     - name: Stop restful booker service
-      run: docker-compose -f ./docker-compose-restfulbooker.yml down --remove-orphans
+      run: docker compose -f ./docker-compose-restfulbooker.yml down --remove-orphans
 
     - name: Test Reporter
       uses: dorny/test-reporter@v1.6.0
