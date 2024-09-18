@@ -3,7 +3,7 @@
 <suite name="Restful ECommerce Test Suite">
     <test name="Testing Each API of ECommerce App separately">
         <classes>
-            <class name="io.github.mfaisalkhatri.api.restfulecommerce.APITests">
+            <class name="io.github.mfaisalkhatri.api.restfulecommerce.HappyPathTests">
                 <methods>
                     <include name="testShouldCreateNewOrders"/>
                     <include name="testShouldGetAllOrders"/>
@@ -12,6 +12,9 @@
                     <include name="testShouldGetOrdersUsingProductId"/>
                     <include name="testTokenGeneration"/>
                     <include name="testShouldUpdateTheOrderUsingPut"/>
+                    <include name="testShouldUpdateTheOrderUsingPatch"/>
+                    <include name="testShouldDeleteTheOrder"/>
+                    <include name="testShouldNotRetrieveDeletedOrder"/>
                 </methods>
             </class>
         </classes>

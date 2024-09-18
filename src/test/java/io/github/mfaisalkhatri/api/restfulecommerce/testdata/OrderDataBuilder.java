@@ -44,7 +44,14 @@ public class OrderDataBuilder {
                 .taxAmt(taxAmount)
                 .totalAmt(totalAmount)
                 .build();
+    }
 
+    public static OrderData getPartialUpdatedOrder() {
+        return OrderData.builder()
+                .productName(FAKER.commerce().productName())
+                .productAmount(FAKER.number().numberBetween(550,560))
+                .qty(FAKER.number().numberBetween(3, 4))
+                .build();
 
     }
 }

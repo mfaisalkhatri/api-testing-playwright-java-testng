@@ -21,21 +21,28 @@ public class Helper {
 
         log.info("Response Headers: \n{}",response.headers());
         log.info("Status Code: {}", response.status());
-        log.info("Response Body: \n{}", prettyPrintJson(response.text()));
+        if(response.text()!=null && !response.text().isEmpty() && !response.text().isBlank()) {
+            log.info("Response Body: \n{}", prettyPrintJson(response.text()));
+        }
+        
     }
 
     private String prettyPrintJson(String text) {
         String prettyPrintJson = "";
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            Object jsonObject = objectMapper.readValue(response.text(), Object.class);
-            prettyPrintJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonObject);
+        if (text != null && !text.isBlank() && !text.isEmpty()) {
+            try {
 
-
-        } catch (JsonProcessingException e) {
-            log.error("Error Printing Pretty Json : {}", e.getMessage());
+                ObjectMapper objectMapper = new ObjectMapper();
+                Object jsonObject = objectMapper.readValue(text, Object.class);
+                prettyPrintJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonObject);
+                return prettyPrintJson;
+            } catch (JsonProcessingException e) {
+                log.error("Error Printing Pretty Json : {}", e.getMessage());
+            }
         }
-        ;
-        return prettyPrintJson;
+        
+        log.info("No response body generated!");
+        return null;
+
     }
 }
