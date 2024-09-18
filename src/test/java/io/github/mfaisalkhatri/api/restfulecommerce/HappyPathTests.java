@@ -38,8 +38,8 @@ public class HappyPathTests extends BaseTest{
 
         final APIResponse response = this.request.post("/addOrder", RequestOptions.create()
                 .setData(this.orderList));
-        final Helper helper = new Helper(response);
-        helper.logResponseDetails();
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
 
         final JSONObject responseObject = new JSONObject(response.text());
         final JSONArray ordersArray = responseObject.getJSONArray("orders");
@@ -57,8 +57,8 @@ public class HappyPathTests extends BaseTest{
 
         final APIResponse response = this.request.get("/getAllOrders");
 
-        final Helper helper = new Helper(response);
-        helper.logResponseDetails();
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
 
         final JSONObject responseObject = new JSONObject(response.text());
         final JSONArray ordersArray = responseObject.getJSONArray("orders");
@@ -75,8 +75,8 @@ public class HappyPathTests extends BaseTest{
         final int orderId = 1;
         final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("id", orderId));
 
-        final Helper helper = new Helper(response);
-        helper.logResponseDetails();
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
 
         final JSONObject responseObject = new JSONObject(response.text());
         final JSONArray ordersArray = responseObject.getJSONArray("orders");
@@ -93,8 +93,8 @@ public class HappyPathTests extends BaseTest{
 
         final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("user_id", userId));
 
-        final Helper helper = new Helper(response);
-        helper.logResponseDetails();
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
 
         final JSONObject responseObject = new JSONObject(response.text());
         final JSONArray ordersArray = responseObject.getJSONArray("orders");
@@ -112,8 +112,8 @@ public class HappyPathTests extends BaseTest{
 
         final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("product_id", productId));
 
-        final Helper helper = new Helper(response);
-        helper.logResponseDetails();
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
 
         final JSONObject responseObject = new JSONObject(response.text());
         final JSONArray ordersArray = responseObject.getJSONArray("orders");
@@ -128,8 +128,8 @@ public class HappyPathTests extends BaseTest{
     public void testTokenGeneration() {
         final APIResponse response = this.request.post("/auth", RequestOptions.create().setData(getCredentials()));
 
-        final Helper helper = new Helper(response);
-        helper.logResponseDetails();
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
 
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -153,8 +153,8 @@ public class HappyPathTests extends BaseTest{
                 .setHeader("Authorization", token)
                 .setData(updatedOrder));
 
-        final Helper helper = new Helper(response);
-        helper.logResponseDetails();
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
 
         final JSONObject updateOrderResponseObject = new JSONObject(response.text());
         final JSONObject orderObject = updateOrderResponseObject.getJSONObject("order");
@@ -184,8 +184,8 @@ public class HappyPathTests extends BaseTest{
                 .setHeader("Authorization", token)
                 .setData(partialUpdatedOrder));
 
-        final Helper helper = new Helper(response);
-        helper.logResponseDetails();
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
 
         final JSONObject updateOrderResponseObject = new JSONObject(response.text());
         final JSONObject orderObject = updateOrderResponseObject.getJSONObject("order");
@@ -210,8 +210,8 @@ public class HappyPathTests extends BaseTest{
         final APIResponse response = this.request.delete("/deleteOrder/" + orderId, RequestOptions.create()
                 .setHeader("Authorization", token));
 
-        final Helper helper = new Helper(response);
-        helper.logResponseDetails();
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
 
         assertEquals(response.status(), 204);
     }
@@ -221,13 +221,13 @@ public class HappyPathTests extends BaseTest{
         final int orderId = 1;
         final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("id", orderId));
 
-        final Helper helper = new Helper(response);
-        helper.logResponseDetails();
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
 
         assertEquals(response.status(), 404);
 
         JSONObject jsonObject = new JSONObject(response.text());
         assertEquals(jsonObject.get("message"), "No Order found with the given parameters!");
     }
-    
+
 }

@@ -4,15 +4,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.playwright.APIResponse;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 
-public class Helper {
+public class Logger {
 
     private APIResponse response;
-    private Logger log;
+    private org.apache.logging.log4j.Logger log;
 
-    public Helper(APIResponse response) {
+    public Logger(APIResponse response) {
         this.response = response;
         log = LogManager.getLogger(getClass());
     }
@@ -21,7 +20,7 @@ public class Helper {
 
         log.info("Response Headers: \n{}",response.headers());
         log.info("Status Code: {}", response.status());
-        if(response.text()!=null && !response.text().isEmpty() && !response.text().isBlank()) {
+        if(response.text()!=null && !response.text().isEmpty() && response.text().isBlank()) {
             log.info("Response Body: \n{}", prettyPrintJson(response.text()));
         }
         

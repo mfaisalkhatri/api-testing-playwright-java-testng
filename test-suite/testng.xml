@@ -5,4 +5,4 @@
         <suite-file path="testng-reqres.xml"/>
         <suite-file path="testng-restfulbooker.xml"/>
     </suite-files>
-</suite> <!-- Suite -->
+</suite>
