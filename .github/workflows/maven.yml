@@ -38,7 +38,7 @@ jobs:
       run: docker compose -f ./docker-compose-restfulbooker.yml up -d
 
     - name: Start restful e-commerce service
-      run: docker compose -f ./docker-compose-ecommerce.yml up --service-ports -d
+      run: docker compose -f ./docker-compose-ecommerce.yml up -d
 
     - name: Build Project
       run: mvn clean install -DskipTests

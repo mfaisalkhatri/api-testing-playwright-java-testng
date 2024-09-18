@@ -13,7 +13,7 @@ public class BaseTest {
 
     protected Playwright playwright;
     protected APIRequestContext request;
-    private static final String BASE_URL = "http://localhost:3004";
+    private static final String BASE_URL = "http://restful-ecommerce:3004";
 
     @BeforeClass
     public void setup() {
