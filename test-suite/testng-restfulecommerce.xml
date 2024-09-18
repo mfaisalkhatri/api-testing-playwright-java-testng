@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Restful ECommerce Test Suite">
+    <test name="Testing Each API of ECommerce App separately">
+        <classes>
+            <class name="io.github.mfaisalkhatri.api.restfulecommerce.APITests">
+                <methods>
+                    <include name="testShouldCreateNewOrders"/>
+                    <include name="testShouldGetAllOrders"/>
+                    <include name="testShouldGetOrderUsingOrderId"/>
+                    <include name="testShouldGetOrdersUsingUserId"/>
+                    <include name="testShouldGetOrdersUsingProductId"/>
+                    <include name="testTokenGeneration"/>
+                    <include name="testShouldUpdateTheOrderUsingPut"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
