@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class OrderData {
+
     @SerializedName("user_id")
     private String userId;
     @SerializedName("product_id")
