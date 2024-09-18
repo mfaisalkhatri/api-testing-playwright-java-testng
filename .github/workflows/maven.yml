@@ -37,6 +37,9 @@ jobs:
     - name: Start restful booker service
       run: docker compose -f ./docker-compose-restfulbooker.yml up -d
 
+    - name: Start restful e-commerce service
+      run: docker compose -f ./docker-compose-ecommerce.yml up -d
+
     - name: Build Project
       run: mvn clean install -DskipTests
 
@@ -45,6 +48,9 @@ jobs:
 
     - name: Stop restful booker service
       run: docker compose -f ./docker-compose-restfulbooker.yml down --remove-orphans
+
+    - name: Stop restful ecommerce service
+      run: docker compose -f ./docker-compose-ecommerce.yml down --remove-orphans
 
     - name: Test Reporter
       uses: dorny/test-reporter@v1.6.0

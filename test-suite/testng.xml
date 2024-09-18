@@ -4,5 +4,6 @@
     <suite-files>
         <suite-file path="testng-reqres.xml"/>
         <suite-file path="testng-restfulbooker.xml"/>
+        <suite-file path="testng-restfulecommerce.xml"/>
     </suite-files>
 </suite>
