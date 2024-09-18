@@ -23,7 +23,7 @@ permissions:
 jobs:
   build:
     name: Build and Test  
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -36,9 +36,6 @@ jobs:
         
     - name: Start restful booker service
       run: docker compose -f ./docker-compose-restfulbooker.yml up -d
-
-    - name: Start restful e-commerce service
-      run: docker compose -f ./docker-compose-ecommerce.yml up -d
 
     - name: Build Project
       run: mvn clean install -DskipTests
