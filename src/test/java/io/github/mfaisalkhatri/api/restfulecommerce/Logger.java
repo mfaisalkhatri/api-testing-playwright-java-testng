@@ -20,7 +20,7 @@ public class Logger {
 
         log.info("Response Headers: \n{}",response.headers());
         log.info("Status Code: {}", response.status());
-        if(response.text()!=null && !response.text().isEmpty() && response.text().isBlank()) {
+        if(response.text()!=null && !response.text().isEmpty() && !response.text().isBlank()) {
             log.info("Response Body: \n{}", prettyPrintJson(response.text()));
         }
         

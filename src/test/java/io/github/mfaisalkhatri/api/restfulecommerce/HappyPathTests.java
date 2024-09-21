@@ -1,7 +1,6 @@
 package io.github.mfaisalkhatri.api.restfulecommerce;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.options.RequestOptions;
 import io.github.mfaisalkhatri.api.restfulecommerce.testdata.OrderData;
@@ -28,7 +27,20 @@ public class HappyPathTests extends BaseTest{
     }
 
     @Test
-    public void testShouldCreateNewOrders() throws JsonProcessingException {
+    public void testShouldPerformHealthCheckOfServer() {
+        final APIResponse response = this.request.get("/getAllOrders");
+
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
+
+        final JSONObject responseObject = new JSONObject(response.text());
+
+        assertEquals(response.status(), 200);
+        assertEquals(responseObject.get("status"), "UP and Running");
+    }
+
+    @Test
+    public void testShouldCreateNewOrders() {
 
         final int totalOrders = 4;
 
