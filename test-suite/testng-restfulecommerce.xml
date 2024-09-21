@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Restful ECommerce Test Suite">
-    <test name="Testing Each API of ECommerce App separately">
+    <test name="Testing Sad Path Scenarios of Restful E-Commerce APIs">
+        <classes>
+            <class name="io.github.mfaisalkhatri.api.restfulecommerce.SadPathTests">
+                <methods>
+                    <include name="testShouldNotCreateOrder_WhenProductIdFieldIsMissing"/>
+                    <include name="testShouldNotCreateOrder_WhenOrderListIsNotArray"/>
+                    <include name="testShouldNotFetchOrder_WhenNoOrderExists"/>
+                    <include name="testShouldNotFetchOrder_WhenNoOrderExistsForOrderId"/>
+                    <include name="testShouldNotFetchOrder_WhenNoOrderExistsForUserId"/>
+                    <include name="testShouldNotFetchOrder_WhenNoOrderExistsForProductId"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Testing Happy Path Scenarios of Restful E-Commerce APIs">
         <classes>
             <class name="io.github.mfaisalkhatri.api.restfulecommerce.HappyPathTests">
                 <methods>

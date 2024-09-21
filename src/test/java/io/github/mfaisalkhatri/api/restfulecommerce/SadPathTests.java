@@ -44,7 +44,7 @@ public class SadPathTests extends BaseTest {
     }
 
     @Test
-    public void testShouldNotFetchOrderWhenNoOrderExists() {
+    public void testShouldNotFetchOrder_WhenNoOrderExists() {
 
         final APIResponse response = this.request.get("/getAllOrders");
 
@@ -54,11 +54,11 @@ public class SadPathTests extends BaseTest {
 
         final JSONObject responseObject = new JSONObject(response.text());
         assertEquals(response.status(), 404);
-        assertEquals(responseObject.get("message"), "No order found!!");
+        assertEquals(responseObject.get("message"), "No Order found!!");
     }
 
     @Test
-    public void testShouldNotFetchOrderWhenNoOrderExistsForOrderId() {
+    public void testShouldNotFetchOrder_WhenNoOrderExistsForOrderId() {
 
         final int orderId = 90;
         final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("id", orderId));
@@ -69,11 +69,11 @@ public class SadPathTests extends BaseTest {
         final JSONObject responseObject = new JSONObject(response.text());
 
         assertEquals(response.status(), 404);
-        assertEquals(responseObject.get("message"), "No order found with the given parameters!");
+        assertEquals(responseObject.get("message"), "No Order found with the given parameters!");
     }
 
     @Test
-    public void testShouldNotFetchOrderWhenNoOrderExistsForUserId() {
+    public void testShouldNotFetchOrder_WhenNoOrderExistsForUserId() {
         final String userId = "20";
 
         final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("user_id", userId));
@@ -84,12 +84,12 @@ public class SadPathTests extends BaseTest {
         final JSONObject responseObject = new JSONObject(response.text());
 
         assertEquals(response.status(), 404);
-        assertEquals(responseObject.get("message"), "No order found with the given parameters!");
+        assertEquals(responseObject.get("message"), "No Order found with the given parameters!");
 
     }
 
     @Test
-    public void testShouldNotFetchOrderWhenNoOrderExistsForProductId() {
+    public void testShouldNotFetchOrder_WhenNoOrderExistsForProductId() {
         final String productId = "987";
 
         final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("product_id", productId));
@@ -100,11 +100,11 @@ public class SadPathTests extends BaseTest {
         final JSONObject responseObject = new JSONObject(response.text());
 
         assertEquals(response.status(), 404);
-        assertEquals(responseObject.get("message"), "No order found with the given parameters!");
+        assertEquals(responseObject.get("message"), "No Order found with the given parameters!");
     }
 
     @Test
-    public void testShouldNotGenerateTokenForInvalidCredentials() {
+    public void testShouldNotGenerateToken_WhenInvalidCredentialsAreGiven() {
 
 
     }
