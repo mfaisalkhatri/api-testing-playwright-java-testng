@@ -11,6 +11,10 @@
                     <include name="testShouldNotFetchOrder_WhenNoOrderExistsForOrderId"/>
                     <include name="testShouldNotFetchOrder_WhenNoOrderExistsForUserId"/>
                     <include name="testShouldNotFetchOrder_WhenNoOrderExistsForProductId"/>
+                    <include name="testShouldNotUpdateOrder_WhenTokenIsMissing"/>
+                    <include name="testShouldNotUpdateOrder_WhenOrderIdIsNotFound"/>
+                    <include name="testShouldNotUpdateOrder_WhenOrderDetailsAreNotProvided"/>
+                    <include name="testShouldNotUpdateOrderWithInvalidToken"/>
                 </methods>
             </class>
         </classes>
