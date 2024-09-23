@@ -13,7 +13,6 @@
                     <include name="testShouldNotFetchOrder_WhenNoOrderExistsForProductId"/>
                     <include name="testShouldNotUpdateOrder_WhenTokenIsMissing"/>
                     <include name="testShouldNotUpdateOrder_WhenOrderIdIsNotFound"/>
-                    <include name="testShouldNotUpdateOrder_WhenOrderDetailsAreNotProvided"/>
                     <include name="testShouldNotUpdateOrderWithInvalidToken"/>
                 </methods>
             </class>
@@ -35,6 +34,15 @@
                     <include name="testShouldUpdateTheOrderUsingPatch"/>
                     <include name="testShouldDeleteTheOrder"/>
                     <include name="testShouldNotRetrieveDeletedOrder"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Testing Sad Path Scenarios of Restful E-Commerce APIs after orders are created">
+        <classes>
+            <class name="io.github.mfaisalkhatri.api.restfulecommerce.SadPathTests">
+                <methods>
+                    <include name="testShouldNotUpdateOrder_WhenOrderDetailsAreNotProvided"/>
                 </methods>
             </class>
         </classes>
