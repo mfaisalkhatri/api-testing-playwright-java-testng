@@ -19,11 +19,13 @@
         <classes>
             <class name="io.github.mfaisalkhatri.api.restfulecommerce.HappyPathTests">
                 <methods>
+                    <include name="testShouldPerformHealthCheckOfServer"/>
                     <include name="testShouldCreateNewOrders"/>
                     <include name="testShouldGetAllOrders"/>
                     <include name="testShouldGetOrderUsingOrderId"/>
                     <include name="testShouldGetOrdersUsingUserId"/>
                     <include name="testShouldGetOrdersUsingProductId"/>
+                    <include name="testShouldGetOrdersUsingOrderIdProductIdAndUserId"/>
                     <include name="testTokenGeneration"/>
                     <include name="testShouldUpdateTheOrderUsingPut"/>
                     <include name="testShouldUpdateTheOrderUsingPatch"/>

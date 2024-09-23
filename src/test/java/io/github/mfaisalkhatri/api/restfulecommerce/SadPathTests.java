@@ -103,10 +103,4 @@ public class SadPathTests extends BaseTest {
         assertEquals(responseObject.get("message"), "No Order found with the given parameters!");
     }
 
-    @Test
-    public void testShouldNotGenerateToken_WhenInvalidCredentialsAreGiven() {
-
-
-    }
-
 }

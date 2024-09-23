@@ -20,6 +20,9 @@ import static org.testng.Assert.assertNotNull;
 public class HappyPathTests extends BaseTest{
 
     private List<OrderData> orderList;
+    private int orderId;
+    private String userId;
+    private String productId;
 
     @BeforeClass
     public void testSetup() {
@@ -28,7 +31,7 @@ public class HappyPathTests extends BaseTest{
 
     @Test
     public void testShouldPerformHealthCheckOfServer() {
-        final APIResponse response = this.request.get("/getAllOrders");
+        final APIResponse response = this.request.get("/health");
 
         final Logger logger = new Logger(response);
         logger.logResponseDetails();
@@ -62,6 +65,12 @@ public class HappyPathTests extends BaseTest{
         assertEquals(this.orderList.get(0).getUserId(), ordersArray.getJSONObject(0).get("user_id"));
         assertEquals(this.orderList.get(0).getProductId(), ordersArray.getJSONObject(0).get("product_id"));
         assertEquals(this.orderList.get(0).getTotalAmt(), ordersArray.getJSONObject(0).get("total_amt"));
+
+        this.orderId = ordersArray.getJSONObject(0).getInt("id");
+        this.userId =ordersArray.getJSONObject(0).getString("user_id");
+        this.productId =ordersArray.getJSONObject(0).getString("product_id");
+
+
     }
 
     @Test
@@ -101,9 +110,8 @@ public class HappyPathTests extends BaseTest{
 
     @Test
     public void testShouldGetOrdersUsingUserId() {
-        final String userId = "2";
 
-        final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("user_id", userId));
+        final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("user_id", this.userId));
 
         final Logger logger = new Logger(response);
         logger.logResponseDetails();
@@ -113,16 +121,14 @@ public class HappyPathTests extends BaseTest{
 
         assertEquals(response.status(), 200);
         assertEquals(responseObject.get("message"), "Order found!!");
-        assertEquals(ordersArray.getJSONObject(0).get("user_id"), userId);
+        assertEquals(ordersArray.getJSONObject(0).get("user_id"), this.userId);
 
     }
 
     @Test
     public void testShouldGetOrdersUsingProductId() {
-        final String productId = "332";
 
-
-        final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("product_id", productId));
+        final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("product_id", this.productId));
 
         final Logger logger = new Logger(response);
         logger.logResponseDetails();
@@ -132,9 +138,34 @@ public class HappyPathTests extends BaseTest{
 
         assertEquals(response.status(), 200);
         assertEquals(responseObject.get("message"), "Order found!!");
-        assertEquals(ordersArray.getJSONObject(0).get("product_id"), productId);
+        assertEquals(ordersArray.getJSONObject(0).get("product_id"), this.productId);
 
     }
+
+    @Test
+    public void testShouldGetOrdersUsingOrderIdProductIdAndUserId() {
+
+        final APIResponse response = this.request.get("/getOrder", RequestOptions.create()
+                .setQueryParam("id", this.orderId)
+                .setQueryParam("product_id", this.productId)
+                .setQueryParam("user_id", this.userId));
+
+        final Logger logger = new Logger(response);
+        logger.logResponseDetails();
+
+        assertEquals(response.status(), 200);
+
+
+        final JSONObject responseObject = new JSONObject(response.text());
+        final JSONArray ordersArray = responseObject.getJSONArray("orders");
+
+        assertEquals(responseObject.get("message"), "Order found!!");
+        assertEquals(ordersArray.getJSONObject(0).get("id"), this.orderId);
+        assertEquals(ordersArray.getJSONObject(0).get("product_id"), this.productId);
+        assertEquals(ordersArray.getJSONObject(0).get("user_id"), this.userId);
+
+    }
+
 
     @Test
     public void testTokenGeneration() {
@@ -238,7 +269,7 @@ public class HappyPathTests extends BaseTest{
 
         assertEquals(response.status(), 404);
 
-        JSONObject jsonObject = new JSONObject(response.text());
+        final JSONObject jsonObject = new JSONObject(response.text());
         assertEquals(jsonObject.get("message"), "No Order found with the given parameters!");
     }
 
