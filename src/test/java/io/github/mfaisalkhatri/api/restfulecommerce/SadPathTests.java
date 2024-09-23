@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.github.mfaisalkhatri.api.restfulecommerce.testdata.OrderDataBuilder.getNewOrder;
-import static io.github.mfaisalkhatri.api.restfulecommerce.testdata.OrderDataBuilder.getOrderDataWithMissingProductId;
+import static io.github.mfaisalkhatri.api.restfulecommerce.testdata.OrderDataBuilder.*;
+import static io.github.mfaisalkhatri.api.restfulecommerce.testdata.TokenBuilder.getCredentials;
 import static org.testng.Assert.assertEquals;
 
 public class SadPathTests extends BaseTest {
@@ -101,6 +101,76 @@ public class SadPathTests extends BaseTest {
 
         assertEquals(response.status(), 404);
         assertEquals(responseObject.get("message"), "No Order found with the given parameters!");
+    }
+
+    @Test
+    public void testShouldNotUpdateOrder_WhenTokenIsMissing() {
+
+        int orderId = 1;
+
+        final OrderData updatedOrder = getUpdatedOrder();
+
+        final APIResponse response = this.request.put("/updateOrder/" + orderId, RequestOptions.create()
+                .setData(updatedOrder));
+
+        final JSONObject responseObject = new JSONObject(response.text());
+
+        assertEquals(response.status(), 403);
+        assertEquals(responseObject.get("message"), "Forbidden! Token is missing!");
+    }
+
+    @Test
+    public void testShouldNotUpdateOrder_WhenOrderIdIsNotFound() {
+        final APIResponse authResponse = this.request.post("/auth", RequestOptions.create().setData(getCredentials()));
+
+        final JSONObject authResponseObject = new JSONObject(authResponse.text());
+        final String token = authResponseObject.get("token").toString();
+
+        final OrderData updatedOrder = getUpdatedOrder();
+
+        final int orderId = 90;
+
+        final APIResponse response = this.request.put("/updateOrder/" + orderId, RequestOptions.create()
+                .setHeader("Authorization", token)
+                .setData(updatedOrder));
+
+
+        final JSONObject responseObject = new JSONObject(response.text());
+
+        assertEquals(response.status(), 404);
+        assertEquals(responseObject.get("message"), "No Order found with the given Order Id!");
+
+    }
+
+    @Test
+    public void testShouldNotUpdateOrder_WhenOrderDetailsAreNotProvided() {
+        final APIResponse authResponse = this.request.post("/auth", RequestOptions.create().setData(getCredentials()));
+
+        final JSONObject authResponseObject = new JSONObject(authResponse.text());
+        final String token = authResponseObject.get("token").toString();
+
+        final int orderId = 2;
+
+        final APIResponse response = this.request.put("/updateOrder/" + orderId, RequestOptions.create()
+                .setHeader("Authorization", token));
+
+        final JSONObject responseObject = new JSONObject(response.text());
+
+        assertEquals(response.status(), 400);
+        assertEquals(responseObject.get("message"), "Each Order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!");
+    }
+
+    @Test
+    public void testShouldNotUpdateOrderWithInvalidToken() {
+        final int orderId = 2;
+
+        final APIResponse response = this.request.put("/updateOrder/" + orderId, RequestOptions.create()
+                .setHeader("Authorization", "token273678"));
+
+        final JSONObject responseObject = new JSONObject(response.text());
+
+        assertEquals(response.status(), 400);
+        assertEquals(responseObject.get("message"), "Failed to authenticate token!");
     }
 
 }
