@@ -15,6 +15,7 @@ This project is the outcome of my self-learning about the API Testing Automation
 - [Lombok](https://projectlombok.org/) has been used to generate Getter and Setters automatically for post body requests.
 - FAKE Rest APIs on [Reqres.in](https://reqres.in/) has been used for testing.
 - End to End scenarios have been added for the [restful booker APIs](https://restful-booker.herokuapp.com/apidoc/index.html).
+- Happy and Sad Path Scenarios have been added for the [restful-ecommerce APIs](https://github.com/mfaisalkhatri/restful-ecommerce)
 
 ## :hammer_and_wrench: Talking more about the Scenarios Covered in this project:
 You will get the answers to the following questions and its respective working code example with [Playwright Java](https://playwright.dev/java/docs/api-testing#writing-api-test) framework in this repository:
@@ -32,10 +33,14 @@ You will get the answers to the following questions and its respective working c
 - How to use `Lombok` for writing the builder pattern code?
 - How to use Builder Pattern for test data generation using [Data Faker](https://github.com/datafaker-net/datafaker)?
 - How to write end-to-end api tests?
+- How to write Happy Path scenarios for the APIs?
+- How to write Sad Path scenarios for the APIs? 
 
 ## :writing_hand: Blog Links
 - [What is API Testing?](https://mfaisalkhatri.github.io/2020/08/08/apitesting/)
 - [How to perform End to End API Testing using Playwright with Java and TestNG](https://medium.com/@iamfaisalkhatri/how-to-perform-end-to-end-api-testing-using-playwright-with-java-and-testng-26b318927115)
+- [Playwright Java API Testing | How to test POST requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-post-requests-4c9102d3ab03)
+- [Playwright Java API Testing | How to test GET requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-get-requests-c036b984cc6d)
 
 ## :question: Need Assistance?
 
