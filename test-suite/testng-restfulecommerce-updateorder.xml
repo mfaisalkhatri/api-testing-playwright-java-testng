@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Restful ECommerce Test Suite">
+    <test name="Testing Happy Path Scenarios of Creating and Updating Orders">
+        <classes>
+            <class name="io.github.mfaisalkhatri.api.restfulecommerce.HappyPathTests">
+                <methods>
+                    <include name="testShouldCreateNewOrders"/>
+                    <include name="testShouldUpdateTheOrderUsingPut"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Testing Sad Path Scenarios of Updating Order">
+        <classes>
+            <class name="io.github.mfaisalkhatri.api.restfulecommerce.SadPathTests">
+                <methods>
+                    <include name="testShouldNotUpdateOrder_WhenOrderIdIsNotFound"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

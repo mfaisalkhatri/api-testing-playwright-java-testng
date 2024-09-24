@@ -53,8 +53,6 @@ public class HappyPathTests extends BaseTest{
 
         final APIResponse response = this.request.post("/addOrder", RequestOptions.create()
                 .setData(this.orderList));
-        final Logger logger = new Logger(response);
-        logger.logResponseDetails();
 
         final JSONObject responseObject = new JSONObject(response.text());
         final JSONArray ordersArray = responseObject.getJSONArray("orders");
@@ -195,9 +193,6 @@ public class HappyPathTests extends BaseTest{
         final APIResponse response = this.request.put("/updateOrder/" + orderId, RequestOptions.create()
                 .setHeader("Authorization", token)
                 .setData(updatedOrder));
-
-        final Logger logger = new Logger(response);
-        logger.logResponseDetails();
 
         final JSONObject updateOrderResponseObject = new JSONObject(response.text());
         final JSONObject orderObject = updateOrderResponseObject.getJSONObject("order");
