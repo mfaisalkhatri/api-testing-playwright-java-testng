@@ -208,7 +208,7 @@ public class HappyPathTests extends BaseTest{
     }
 
     @Test
-    public void testShouldUpdateTheOrderUsingPatch() {
+    public void testShouldPartialUpdateTheOrderUsingPatch() {
 
         final APIResponse authResponse = this.request.post("/auth", RequestOptions.create().setData(getCredentials()));
 
@@ -221,10 +221,7 @@ public class HappyPathTests extends BaseTest{
         final APIResponse response = this.request.patch("/partialUpdateOrder/" + orderId, RequestOptions.create()
                 .setHeader("Authorization", token)
                 .setData(partialUpdatedOrder));
-
-        final Logger logger = new Logger(response);
-        logger.logResponseDetails();
-
+        
         final JSONObject updateOrderResponseObject = new JSONObject(response.text());
         final JSONObject orderObject = updateOrderResponseObject.getJSONObject("order");
 
