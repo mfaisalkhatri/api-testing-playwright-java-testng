@@ -208,7 +208,7 @@ public class HappyPathTests extends BaseTest{
     }
 
     @Test
-    public void testShouldUpdateTheOrderUsingPatch() {
+    public void testShouldPartialUpdateTheOrderUsingPatch() {
 
         final APIResponse authResponse = this.request.post("/auth", RequestOptions.create().setData(getCredentials()));
 

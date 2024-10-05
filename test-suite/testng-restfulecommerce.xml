@@ -14,6 +14,10 @@
                     <include name="testShouldNotUpdateOrder_WhenTokenIsMissing"/>
                     <include name="testShouldNotUpdateOrder_WhenOrderIdIsNotFound"/>
                     <include name="testShouldNotUpdateOrderWithInvalidToken"/>
+                    <include name="testShouldNotPartialUpdateOrder_WhenTokenIsMissing"/>
+                    <include name="testShouldNotPartialUpdateOrder_WhenOrderIdIsNotFound"/>
+                    <include name="testShouldNotPartialUpdateOrder_WhenOrderDetailsAreNotProvided"/>
+                    <include name="testShouldNotPartialUpdateOrderWithInvalidToken"/>
                 </methods>
             </class>
         </classes>
@@ -31,7 +35,7 @@
                     <include name="testShouldGetOrdersUsingOrderIdProductIdAndUserId"/>
                     <include name="testTokenGeneration"/>
                     <include name="testShouldUpdateTheOrderUsingPut"/>
-                    <include name="testShouldUpdateTheOrderUsingPatch"/>
+                    <include name="testShouldPartialUpdateTheOrderUsingPatch"/>
                     <include name="testShouldDeleteTheOrder"/>
                     <include name="testShouldNotRetrieveDeletedOrder"/>
                 </methods>

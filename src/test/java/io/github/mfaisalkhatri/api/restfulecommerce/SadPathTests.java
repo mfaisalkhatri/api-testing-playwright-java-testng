@@ -173,4 +173,73 @@ public class SadPathTests extends BaseTest {
         assertEquals(responseObject.get("message"), "Failed to authenticate token!");
     }
 
+    @Test
+    public void testShouldNotPartialUpdateOrder_WhenTokenIsMissing() {
+
+        int orderId = 1;
+
+        final OrderData partialUpdatedOrder = getPartialUpdatedOrder();
+
+        final APIResponse response = this.request.patch("/partialUpdateOrder/" + orderId, RequestOptions.create()
+                .setData(partialUpdatedOrder));
+
+        final JSONObject responseObject = new JSONObject(response.text());
+
+        assertEquals(response.status(), 403);
+        assertEquals(responseObject.get("message"), "Forbidden! Token is missing!");
+    }
+
+    @Test
+    public void testShouldNotPartialUpdateOrder_WhenOrderIdIsNotFound() {
+        final APIResponse authResponse = this.request.post("/auth", RequestOptions.create().setData(getCredentials()));
+
+        final JSONObject authResponseObject = new JSONObject(authResponse.text());
+        final String token = authResponseObject.get("token").toString();
+
+        final OrderData updatedOrder = getPartialUpdatedOrder();
+
+        final int orderId = 90;
+
+        final APIResponse response = this.request.patch("/partialUpdateOrder/" + orderId, RequestOptions.create()
+                .setHeader("Authorization", token)
+                .setData(updatedOrder));
+
+
+        final JSONObject responseObject = new JSONObject(response.text());
+
+        assertEquals(response.status(), 404);
+        assertEquals(responseObject.get("message"), "No Order found with the given Order Id!");
+
+    }
+
+    @Test
+    public void testShouldNotPartialUpdateOrder_WhenOrderDetailsAreNotProvided() {
+        final APIResponse authResponse = this.request.post("/auth", RequestOptions.create().setData(getCredentials()));
+
+        final JSONObject authResponseObject = new JSONObject(authResponse.text());
+        final String token = authResponseObject.get("token").toString();
+
+        final int orderId = 2;
+
+        final APIResponse response = this.request.patch("/partialUpdateOrder/" + orderId, RequestOptions.create()
+                .setHeader("Authorization", token));
+
+        final JSONObject responseObject = new JSONObject(response.text());
+
+        assertEquals(response.status(), 400);
+        assertEquals(responseObject.get("message"), "Invalid request, no data provided to update!");
+    }
+
+    @Test
+    public void testShouldNotPartialUpdateOrderWithInvalidToken() {
+        final int orderId = 2;
+
+        final APIResponse response = this.request.patch("/partialUpdateOrder/" + orderId, RequestOptions.create()
+                .setHeader("Authorization", "token273678"));
+
+        final JSONObject responseObject = new JSONObject(response.text());
+
+        assertEquals(response.status(), 400);
+        assertEquals(responseObject.get("message"), "Failed to authenticate token!");
+    }
 }
