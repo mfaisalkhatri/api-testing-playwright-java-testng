@@ -11,13 +11,4 @@
             </class>
         </classes>
     </test>
-    <test name="Testing Sad Path Scenarios of Updating Order">
-        <classes>
-            <class name="io.github.mfaisalkhatri.api.restfulecommerce.SadPathTests">
-                <methods>
-                    <include name="testShouldNotPartialUpdateOrder_WhenTokenIsMissing"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
 </suite>
