@@ -5,6 +5,7 @@ import static io.github.mfaisalkhatri.api.restfulecommerce.testdata.OrderDataBui
 import static io.github.mfaisalkhatri.api.restfulecommerce.testdata.OrderDataBuilder.getPartialUpdatedOrder;
 import static io.github.mfaisalkhatri.api.restfulecommerce.testdata.OrderDataBuilder.getUpdatedOrder;
 import static io.github.mfaisalkhatri.api.restfulecommerce.testdata.TokenBuilder.getCredentials;
+import static io.github.mfaisalkhatri.api.restfulecommerce.testdata.TokenBuilder.getInvalidCredentials;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -294,6 +295,7 @@ public class SadPathTests extends BaseTest {
 
     @Test
     public void testShouldNotDeleteOrder_WhenOrderIdIsNotFound () {
+
         final APIResponse authResponse = this.request.post ("/auth", RequestOptions.create ()
             .setData (getCredentials ()));
 
@@ -330,4 +332,32 @@ public class SadPathTests extends BaseTest {
         assertEquals (response.status (), 400);
         assertEquals (responseObject.get ("message"), "Failed to authenticate token!");
     }
+
+    @Test
+    public void testShouldNotGenerateToken_ForInvalidCredentials () {
+
+        final APIResponse response = this.request.post ("/auth", RequestOptions.create ()
+            .setData (getInvalidCredentials ()));
+
+        logResponse (response);
+
+        final JSONObject responseObject = new JSONObject (response.text ());
+
+        assertEquals (response.status (), 401);
+        assertEquals (responseObject.get ("message"), "Authentication Failed! Invalid username or password!");
+    }
+
+    @Test
+    public void testShouldNotGenerateToken_WhenCredentialsAreMissing () {
+
+        final APIResponse response = this.request.post ("/auth", RequestOptions.create ());
+
+        logResponse (response);
+
+        final JSONObject responseObject = new JSONObject (response.text ());
+
+        assertEquals (response.status (), 400);
+        assertEquals (responseObject.get ("message"), "Username and Password is required for authentication!");
+    }
+
 }

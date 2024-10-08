@@ -8,4 +8,13 @@ public class TokenBuilder {
             .password ("secretPass123")
             .build ();
     }
+
+    public static TokenData getInvalidCredentials() {
+        return TokenData.builder ()
+            .username ("Manager")
+            .password ("PAssword@123")
+            .build ();
+
+
+    }
 }

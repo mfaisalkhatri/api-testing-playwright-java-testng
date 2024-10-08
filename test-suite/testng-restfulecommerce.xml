@@ -21,6 +21,8 @@
                     <include name="testShouldNotDeleteOrder_WhenTokenIsMissing"/>
                     <include name="testShouldNotDeleteOrder_WhenOrderIdIsNotFound"/>
                     <include name="testShouldNotDeleteOrderWithInvalidToken"/>
+                    <include name="testShouldNotGenerateToken_ForInvalidCredentials"/>
+                    <include name="testShouldNotGenerateToken_WhenCredentialsAreMissing"/>
                 </methods>
             </class>
         </classes>
