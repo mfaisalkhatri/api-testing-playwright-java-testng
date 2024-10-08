@@ -18,6 +18,9 @@
                     <include name="testShouldNotPartialUpdateOrder_WhenOrderIdIsNotFound"/>
                     <include name="testShouldNotPartialUpdateOrder_WhenOrderDetailsAreNotProvided"/>
                     <include name="testShouldNotPartialUpdateOrderWithInvalidToken"/>
+                    <include name="testShouldNotDeleteOrder_WhenTokenIsMissing"/>
+                    <include name="testShouldNotDeleteOrder_WhenOrderIdIsNotFound"/>
+                    <include name="testShouldNotDeleteOrderWithInvalidToken"/>
                 </methods>
             </class>
         </classes>
