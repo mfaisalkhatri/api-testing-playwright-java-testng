@@ -19,7 +19,7 @@ This project is the outcome of my self-learning about the API Testing Automation
 
 ## :hammer_and_wrench: Talking more about the Scenarios Covered in this project:
 You will get the answers to the following questions and its respective working code example with [Playwright Java](https://playwright.dev/java/docs/api-testing#writing-api-test) framework in this repository:
-- How to write tests for `Get` requests?
+- How to write tests for `GET` requests?
 - How to write tests for `POST` requests?
 - How to write tests for `PUT` requests?
 - How to write tests for `PATCH` requests?
@@ -35,12 +35,16 @@ You will get the answers to the following questions and its respective working c
 - How to write end-to-end api tests?
 - How to write Happy Path scenarios for the APIs?
 - How to write Sad Path scenarios for the APIs? 
+- How to log the Response ?
 
 ## :writing_hand: Blog Links
 - [What is API Testing?](https://mfaisalkhatri.github.io/2020/08/08/apitesting/)
 - [How to perform End to End API Testing using Playwright with Java and TestNG](https://medium.com/@iamfaisalkhatri/how-to-perform-end-to-end-api-testing-using-playwright-with-java-and-testng-26b318927115)
 - [Playwright Java API Testing | How to test POST requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-post-requests-4c9102d3ab03)
 - [Playwright Java API Testing | How to test GET requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-get-requests-c036b984cc6d)
+- [Playwright Java API Testing | How to test PUT requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-put-requests-d6b1d054d64b)
+- [Playwright Java API Testing | How to test PATCH requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-patch-requests-f6b0867d91e7)
+- [Playwright Java API Testing | How to test DELETE requests?](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-delete-requests-2ff77feb0383)
 
 ## :question: Need Assistance?
 
