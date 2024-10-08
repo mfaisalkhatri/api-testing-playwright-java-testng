@@ -13,9 +13,11 @@ import java.util.List;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.options.RequestOptions;
 import io.github.mfaisalkhatri.api.restfulecommerce.testdata.OrderData;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 
+@Slf4j
 public class SadPathTests extends BaseTest {
 
 
@@ -28,10 +30,12 @@ public class SadPathTests extends BaseTest {
         final APIResponse response = this.request.post("/addOrder",
                 RequestOptions.create().setData(orderList));
 
+        logResponse (response);
+
         final JSONObject responseObject = new JSONObject(response.text());
         assertEquals(response.status(), 400);
-        assertEquals(responseObject.get("message"), "Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!");
-
+        assertEquals (responseObject.get ("message"),
+            "Each order must have user_id, product_id, product_name, product_amount, qty, tax_amt, and total_amt!");
 
     }
 
@@ -41,9 +45,12 @@ public class SadPathTests extends BaseTest {
         final APIResponse response = this.request.post("/addOrder",
                 RequestOptions.create().setData(getNewOrder()));
 
+        logResponse (response);
+
         final JSONObject responseObject = new JSONObject(response.text());
+
         assertEquals(response.status(), 400);
-        assertEquals(responseObject.get("message"), "Request Payload must be an array of orders!");
+        assertEquals (responseObject.get ("message"), "Request Payload must be an array of orders!");
     }
 
     @Test
@@ -51,9 +58,7 @@ public class SadPathTests extends BaseTest {
 
         final APIResponse response = this.request.get("/getAllOrders");
 
-        final Logger logger = new Logger(response);
-        logger.logResponseDetails();
-
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject(response.text());
         assertEquals(response.status(), 404);
@@ -64,10 +69,10 @@ public class SadPathTests extends BaseTest {
     public void testShouldNotFetchOrder_WhenNoOrderExistsForOrderId() {
 
         final int orderId = 90;
-        final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("id", orderId));
+        final APIResponse response = this.request.get ("/getOrder", RequestOptions.create ()
+            .setQueryParam ("id", orderId));
 
-        final Logger logger = new Logger(response);
-        logger.logResponseDetails();
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -79,10 +84,10 @@ public class SadPathTests extends BaseTest {
     public void testShouldNotFetchOrder_WhenNoOrderExistsForUserId() {
         final String userId = "20";
 
-        final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("user_id", userId));
+        final APIResponse response = this.request.get ("/getOrder", RequestOptions.create ()
+            .setQueryParam ("user_id", userId));
 
-        final Logger logger = new Logger(response);
-        logger.logResponseDetails();
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -95,10 +100,10 @@ public class SadPathTests extends BaseTest {
     public void testShouldNotFetchOrder_WhenNoOrderExistsForProductId() {
         final String productId = "987";
 
-        final APIResponse response = this.request.get("/getOrder", RequestOptions.create().setQueryParam("product_id", productId));
+        final APIResponse response = this.request.get ("/getOrder", RequestOptions.create ()
+            .setQueryParam ("product_id", productId));
 
-        final Logger logger = new Logger(response);
-        logger.logResponseDetails();
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -113,8 +118,10 @@ public class SadPathTests extends BaseTest {
 
         final OrderData updatedOrder = getUpdatedOrder();
 
-        final APIResponse response = this.request.put("/updateOrder/" + orderId, RequestOptions.create()
+        final APIResponse response = this.request.put ("/updateOrder/" + orderId, RequestOptions.create ()
                 .setData(updatedOrder));
+
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -124,7 +131,10 @@ public class SadPathTests extends BaseTest {
 
     @Test
     public void testShouldNotUpdateOrder_WhenOrderIdIsNotFound() {
-        final APIResponse authResponse = this.request.post("/auth", RequestOptions.create().setData(getCredentials()));
+        final APIResponse authResponse = this.request.post ("/auth", RequestOptions.create ()
+            .setData (getCredentials ()));
+
+        logResponse (authResponse);
 
         final JSONObject authResponseObject = new JSONObject(authResponse.text());
         final String token = authResponseObject.get("token").toString();
@@ -137,6 +147,7 @@ public class SadPathTests extends BaseTest {
                 .setHeader("Authorization", token)
                 .setData(updatedOrder));
 
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -147,7 +158,10 @@ public class SadPathTests extends BaseTest {
 
     @Test
     public void testShouldNotUpdateOrder_WhenOrderDetailsAreNotProvided() {
-        final APIResponse authResponse = this.request.post("/auth", RequestOptions.create().setData(getCredentials()));
+        final APIResponse authResponse = this.request.post ("/auth", RequestOptions.create ()
+            .setData (getCredentials ()));
+
+        logResponse (authResponse);
 
         final JSONObject authResponseObject = new JSONObject(authResponse.text());
         final String token = authResponseObject.get("token").toString();
@@ -156,6 +170,8 @@ public class SadPathTests extends BaseTest {
 
         final APIResponse response = this.request.put("/updateOrder/" + orderId, RequestOptions.create()
                 .setHeader("Authorization", token));
+
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -170,6 +186,8 @@ public class SadPathTests extends BaseTest {
         final APIResponse response = this.request.put("/updateOrder/" + orderId, RequestOptions.create()
                 .setHeader("Authorization", "token273678"));
 
+        logResponse (response);
+
         final JSONObject responseObject = new JSONObject(response.text());
 
         assertEquals(response.status(), 400);
@@ -183,8 +201,10 @@ public class SadPathTests extends BaseTest {
 
         final OrderData partialUpdatedOrder = getPartialUpdatedOrder();
 
-        final APIResponse response = this.request.patch("/partialUpdateOrder/" + orderId, RequestOptions.create()
+        final APIResponse response = this.request.patch ("/partialUpdateOrder/" + orderId, RequestOptions.create ()
                 .setData(partialUpdatedOrder));
+
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -194,7 +214,10 @@ public class SadPathTests extends BaseTest {
 
     @Test
     public void testShouldNotPartialUpdateOrder_WhenOrderIdIsNotFound() {
-        final APIResponse authResponse = this.request.post("/auth", RequestOptions.create().setData(getCredentials()));
+        final APIResponse authResponse = this.request.post ("/auth", RequestOptions.create ()
+            .setData (getCredentials ()));
+
+        logResponse (authResponse);
 
         final JSONObject authResponseObject = new JSONObject(authResponse.text());
         final String token = authResponseObject.get("token").toString();
@@ -203,10 +226,11 @@ public class SadPathTests extends BaseTest {
 
         final int orderId = 90;
 
-        final APIResponse response = this.request.patch("/partialUpdateOrder/" + orderId, RequestOptions.create()
+        final APIResponse response = this.request.patch ("/partialUpdateOrder/" + orderId, RequestOptions.create ()
                 .setHeader("Authorization", token)
                 .setData(updatedOrder));
 
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -217,7 +241,10 @@ public class SadPathTests extends BaseTest {
 
     @Test
     public void testShouldNotPartialUpdateOrder_WhenOrderDetailsAreNotProvided() {
-        final APIResponse authResponse = this.request.post("/auth", RequestOptions.create().setData(getCredentials()));
+        final APIResponse authResponse = this.request.post ("/auth", RequestOptions.create ()
+            .setData (getCredentials ()));
+
+        logResponse (authResponse);
 
         final JSONObject authResponseObject = new JSONObject(authResponse.text());
         final String token = authResponseObject.get("token").toString();
@@ -226,6 +253,8 @@ public class SadPathTests extends BaseTest {
 
         final APIResponse response = this.request.patch("/partialUpdateOrder/" + orderId, RequestOptions.create()
                 .setHeader("Authorization", token));
+
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -237,8 +266,10 @@ public class SadPathTests extends BaseTest {
     public void testShouldNotPartialUpdateOrderWithInvalidToken() {
         final int orderId = 2;
 
-        final APIResponse response = this.request.patch("/partialUpdateOrder/" + orderId, RequestOptions.create()
+        final APIResponse response = this.request.patch ("/partialUpdateOrder/" + orderId, RequestOptions.create ()
                 .setHeader("Authorization", "token273678"));
+
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -253,6 +284,8 @@ public class SadPathTests extends BaseTest {
 
         final APIResponse response = this.request.delete ("/deleteOrder/" + orderId);
 
+        logResponse (response);
+
         final JSONObject responseObject = new JSONObject (response.text ());
 
         assertEquals (response.status (), 403);
@@ -264,6 +297,8 @@ public class SadPathTests extends BaseTest {
         final APIResponse authResponse = this.request.post ("/auth", RequestOptions.create ()
             .setData (getCredentials ()));
 
+        logResponse (authResponse);
+
         final JSONObject authResponseObject = new JSONObject (authResponse.text ());
         final String token = authResponseObject.get ("token")
             .toString ();
@@ -272,6 +307,8 @@ public class SadPathTests extends BaseTest {
 
         final APIResponse response = this.request.delete ("/deleteOrder/" + orderId, RequestOptions.create ()
             .setHeader ("Authorization", token));
+
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject (response.text ());
 
@@ -285,6 +322,8 @@ public class SadPathTests extends BaseTest {
 
         final APIResponse response = this.request.delete ("/deleteOrder/" + orderId, RequestOptions.create ()
             .setHeader ("Authorization", "token273678"));
+
+        logResponse (response);
 
         final JSONObject responseObject = new JSONObject (response.text ());
 
