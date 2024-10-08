@@ -13,4 +13,12 @@
             <AppenderRef ref="LogToConsole"/>
         </Root>
     </Loggers>
+    <Loggers>
+        <Logger name="io.github.mfaisalkhatri" level="trace" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="LogToConsole"/>
+        </Root>
+    </Loggers>
 </Configuration>

@@ -22,5 +22,4 @@ public class OrderData {
     private int taxAmt;
     @SerializedName("total_amt")
     private int totalAmt;
-
 }
