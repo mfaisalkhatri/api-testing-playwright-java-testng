@@ -17,7 +17,7 @@ public class Logger {
     }
 
     public void logResponseDetails() {
-        this.log.trace ("Logging Response Details.....");
+        this.log.info ("Logging Response Details.....");
 
         this.log.info ("Response Headers: \n{}", this.response.headers ());
         this.log.info ("Status Code: {}", this.response.status ());
@@ -26,7 +26,7 @@ public class Logger {
             .isBlank ()) {
             this.log.info ("Response Body: \n{}", prettyPrintJson (this.response.text ()));
         }
-        this.log.trace ("End of Logs!");
+        this.log.info ("End of Logs!");
     }
 
     private String prettyPrintJson (final String text) {
@@ -44,6 +44,5 @@ public class Logger {
         }
         this.log.info ("No response body generated!");
         return null;
-
     }
 }
