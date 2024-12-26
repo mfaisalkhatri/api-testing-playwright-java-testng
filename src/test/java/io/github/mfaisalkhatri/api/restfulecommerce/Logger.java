@@ -3,6 +3,7 @@ package io.github.mfaisalkhatri.api.restfulecommerce;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.playwright.APIResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 
 
@@ -17,32 +18,40 @@ public class Logger {
     }
 
     public void logResponseDetails() {
-        this.log.info ("Logging Response Details.....");
-
-        this.log.info ("Response Headers: \n{}", this.response.headers ());
-        this.log.info ("Status Code: {}", this.response.status ());
-        if (this.response.text () != null && !this.response.text ()
-            .isEmpty () && !this.response.text ()
-            .isBlank ()) {
-            this.log.info ("Response Body: \n{}", prettyPrintJson (this.response.text ()));
+        String responseBody = this.response.text ();
+        if (StringUtils.isNotBlank (responseBody)) {
+            this.log.info ("Logging Response Details....\n responseHeaders: {}, \nstatusCode: {}, \nresponseBody: {}",
+                this.response.headers (), this.response.status (), prettyPrintJson (this.response.text ()));
         }
         this.log.info ("End of Logs!");
     }
 
     private String prettyPrintJson (final String text) {
-        String prettyPrintJson = "";
-        if (text != null && !text.isBlank() && !text.isEmpty()) {
-            try {
-
-                final ObjectMapper objectMapper = new ObjectMapper ();
-                final Object jsonObject = objectMapper.readValue (text, Object.class);
-                prettyPrintJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonObject);
-                return prettyPrintJson;
-            } catch (final JsonProcessingException e) {
-                this.log.error ("Error Printing Pretty Json : {}", e.getMessage ());
-            }
+        try {
+            final ObjectMapper objectMapper = new ObjectMapper ();
+            final Object jsonObject = objectMapper.readValue (text, Object.class);
+            return objectMapper.writerWithDefaultPrettyPrinter ()
+                .writeValueAsString (jsonObject);
+        } catch (final JsonProcessingException e) {
+            this.log.error ("Failed to pretty print JSON: {}", e.getMessage (), e);
+            return text;
         }
-        this.log.info ("No response body generated!");
-        return null;
     }
+
+    //    private String prettyPrintJson (final String text) {
+    //        String prettyPrintJson = "";
+    //        if (text != null && !text.isBlank() && !text.isEmpty()) {
+    //            try {
+    //
+    //                final ObjectMapper objectMapper = new ObjectMapper ();
+    //                final Object jsonObject = objectMapper.readValue (text, Object.class);
+    //                prettyPrintJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonObject);
+    //                return prettyPrintJson;
+    //            } catch (final JsonProcessingException e) {
+    //                this.log.error ("Error Printing Pretty Json : {}", e.getMessage ());
+    //            }
+    //        }
+    //        this.log.info ("No response body generated!");
+    //        return null;
+    //    }
 }

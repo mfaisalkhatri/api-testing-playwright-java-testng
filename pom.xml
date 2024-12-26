@@ -12,25 +12,25 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <playwright-version>1.47.0</playwright-version>
+        <playwright-version>1.49.0</playwright-version>
         <testng-version>7.10.2</testng-version>
         <hamcrest-all-version>1.3</hamcrest-all-version>
         <json-simple-version>1.1.1</json-simple-version>
-        <lombok-version>1.18.34</lombok-version>
-        <datafaker-version>2.4.0</datafaker-version>
+        <lombok-version>1.18.36</lombok-version>
+        <datafaker-version>2.4.2</datafaker-version>
         <gson-version>2.11.0</gson-version>
         <org-json-verion>20240303</org-json-verion>
-        <jackson-databind-version>2.18.0</jackson-databind-version>
+        <jackson-databind-version>2.18.2</jackson-databind-version>
         <log4j-core-version>2.24.1</log4j-core-version>
         <log4j-api-version>2.24.1</log4j-api-version>
+        <commons-lang3-version>3.17.0</commons-lang3-version>
         <maven-compiler-plugin-version>3.13.0</maven-compiler-plugin-version>
         <maven-surefire-plugin-version>3.3.1</maven-surefire-plugin-version>
         <java-release-version>17</java-release-version>
-        <maven-enforcer-version>3.5.0</maven-enforcer-version>
+        <maven-enforcer-version>3.5.2</maven-enforcer-version>
         <suite-xml>test-suite/testng.xml</suite-xml>
     </properties>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.microsoft.playwright/playwright -->
         <dependency>
             <groupId>com.microsoft.playwright</groupId>
             <artifactId>playwright</artifactId>
@@ -46,7 +46,6 @@
             <artifactId>json</artifactId>
             <version>${org-json-verion}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -78,6 +77,12 @@
                 <artifactId>log4j-core</artifactId>
                 <version>${log4j-core-version}</version>
             </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3-version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <pluginManagement>
