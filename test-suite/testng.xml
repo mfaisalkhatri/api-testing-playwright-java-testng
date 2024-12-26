@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="APi Test Automation with Playwright">
+<suite name="API Test Automation with Playwright">
     <suite-files>
         <suite-file path="testng-reqres.xml"/>
         <suite-file path="testng-restfulbooker.xml"/>

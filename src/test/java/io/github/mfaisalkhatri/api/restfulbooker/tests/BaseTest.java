@@ -3,7 +3,9 @@ package io.github.mfaisalkhatri.api.restfulbooker.tests;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.microsoft.playwright.APIResponse;
 import io.github.mfaisalkhatri.api.manager.RequestManager;
+import io.github.mfaisalkhatri.api.restfulecommerce.Logger;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -30,5 +32,10 @@ public class BaseTest {
     public void tearDown() {
         this.manager.disposeAPIRequestContext();
         this.manager.closePlaywright();
+    }
+
+    protected void logResponse (final APIResponse response) {
+        final Logger logger = new Logger (response);
+        logger.logResponseDetails ();
     }
 }

@@ -35,6 +35,7 @@ public class RestfulBookerEndToEndTests extends BaseTest {
         final APIResponse response = this.manager.postRequest("/booking", RequestOptions.create()
                 .setData(this.bookingData));
 
+        logResponse (response);
         assertEquals(response.status(), 200);
 
         final JSONObject responseObject = new JSONObject(response.text());
@@ -51,6 +52,7 @@ public class RestfulBookerEndToEndTests extends BaseTest {
     @Test
     public void getBookingTest() {
         final APIResponse response = this.manager.getRequest("/booking/" + this.bookingId);
+        logResponse (response);
         assertEquals(response.status(), 200);
 
         final JSONObject responseObject = new JSONObject(response.text());
@@ -67,6 +69,7 @@ public class RestfulBookerEndToEndTests extends BaseTest {
         final APIResponse response = this.manager.putRequest("/booking/" + this.bookingId, RequestOptions.create()
                 .setData(updateBookingData)
                 .setHeader("Cookie", "token=" + this.token));
+        logResponse (response);
         assertEquals(response.status(), 200);
 
         final JSONObject responseObject = new JSONObject(response.text());
@@ -82,6 +85,7 @@ public class RestfulBookerEndToEndTests extends BaseTest {
         final Tokencreds tokenData = getToken();
         final APIResponse response = this.manager.postRequest("/auth", RequestOptions.create()
                 .setData(tokenData));
+        logResponse (response);
         assertEquals(response.status(), 200);
 
         final JSONObject responseObject = new JSONObject(response.text());
@@ -99,6 +103,7 @@ public class RestfulBookerEndToEndTests extends BaseTest {
                 .setData(partialBookingData)
                 .setHeader("Cookie", "token=" + this.token));
 
+        logResponse (response);
         assertEquals(response.status(), 200);
         final JSONObject responseObject = new JSONObject(response.text());
 
@@ -111,12 +116,14 @@ public class RestfulBookerEndToEndTests extends BaseTest {
         final APIResponse response = this.manager.deleteRequest("/booking/" + this.bookingId, RequestOptions.create()
                 .setHeader("Cookie", "token=" + this.token));
 
+        logResponse (response);
         assertEquals(response.status(), 201);
     }
 
     @Test
     public void testBookingDeleted() {
         final APIResponse response = this.manager.getRequest("/booking/" + this.bookingId);
+        logResponse (response);
         assertEquals(response.status(), 404);
     }
 }
