@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.microsoft.playwright.APIResponse;
 import io.github.mfaisalkhatri.api.manager.RequestManager;
-import io.github.mfaisalkhatri.api.restfulecommerce.Logger;
+import io.github.mfaisalkhatri.api.logger.Logger;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
