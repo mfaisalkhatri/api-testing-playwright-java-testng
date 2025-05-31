@@ -44,7 +44,9 @@ jobs:
       run: mvn clean install -DskipTests
 
     - name: Run tests
-      run: mvn clean test
+      env:
+        API_KEY: ${{ secrets.REQRES_API_KEY }}
+      run: mvn clean test -Dapi-key=$API_KEY
 
     - name: Stop restful booker service
       run: docker compose -f ./docker-compose-restfulbooker.yml down --remove-orphans
