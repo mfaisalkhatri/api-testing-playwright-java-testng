@@ -20,9 +20,9 @@
         <datafaker-version>2.4.3</datafaker-version>
         <gson-version>2.13.1</gson-version>
         <org-json-verion>20250517</org-json-verion>
-        <jackson-databind-version>2.19.0</jackson-databind-version>
-        <log4j-core-version>2.24.1</log4j-core-version>
-        <log4j-api-version>2.24.1</log4j-api-version>
+        <jackson-databind-version>2.19.1</jackson-databind-version>
+        <log4j-core-version>2.25.0</log4j-core-version>
+        <log4j-api-version>2.25.0</log4j-api-version>
         <commons-lang3-version>3.17.0</commons-lang3-version>
         <maven-compiler-plugin-version>3.14.0</maven-compiler-plugin-version>
         <maven-surefire-plugin-version>3.5.3</maven-surefire-plugin-version>
