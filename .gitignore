@@ -12,3 +12,5 @@
 /.allure/
 /.DS_Store
 /*.iml
+.DS_Store
+src/.DS_Store
