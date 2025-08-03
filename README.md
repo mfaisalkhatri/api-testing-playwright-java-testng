@@ -1,6 +1,4 @@
-![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Java CI with Maven](https://github.com/mfaisalkhatri/api-testing-playwright-java-testng/actions/workflows/maven.yml/badge.svg)](https://github.com/mfaisalkhatri/api-testing-playwright-java-testng/actions/workflows/maven.yml)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Java CI with Maven](https://github.com/mfaisalkhatri/api-testing-playwright-java-testng/actions/workflows/maven.yml/badge.svg)](https://github.com/mfaisalkhatri/api-testing-playwright-java-testng/actions/workflows/maven.yml)
 
 ## Don't forget to give a :star: to make the project popular.
 
@@ -58,4 +56,4 @@ You will get the answers to the following questions and its respective working c
 Contact me for Paid trainings related to Test Automation and Software Testing, 
 mail me @ `mohammadfaisalkhatri@gmail.com` or ping me on [LinkedIn](https://www.linkedin.com/in/faisalkhatri/)
 
-## :thought_balloon: Checkout the blogs related to Testing on [my website](https://mfaisalkhatri.github.io) and [medium](https://medium.com/@iamfaisalkhatri)
+## :thought_balloon: Checkout tutorial blogs related to Software Testing on my [Medium](https://medium.com/@iamfaisalkhatri) blog
