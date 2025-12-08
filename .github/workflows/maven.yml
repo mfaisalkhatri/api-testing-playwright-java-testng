@@ -59,7 +59,7 @@ jobs:
       run: docker compose -f ./docker-compose-ecommerce.yml down --remove-orphans
 
     - name: Test Reporter
-      uses: dorny/test-reporter@v2.2.0
+      uses: dorny/test-reporter@v2.3.0
       if: always()
       with:
         name: Test Results
