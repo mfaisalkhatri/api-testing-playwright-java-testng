@@ -19,7 +19,7 @@
         <lombok-version>1.18.42</lombok-version>
         <datafaker-version>2.5.3</datafaker-version>
         <gson-version>2.13.2</gson-version>
-        <org-json-verion>20250517</org-json-verion>
+        <org-json-verion>20251224</org-json-verion>
         <jackson-databind-version>2.20.1</jackson-databind-version>
         <log4j-core-version>2.25.3</log4j-core-version>
         <log4j-api-version>2.25.3</log4j-api-version>
