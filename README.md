@@ -1,6 +1,3 @@
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Java CI with Maven](https://github.com/mfaisalkhatri/api-testing-playwright-java-testng/actions/workflows/maven.yml/badge.svg)](https://github.com/mfaisalkhatri/api-testing-playwright-java-testng/actions/workflows/maven.yml)
-
-## Don't forget to give a :star: to make the project popular.
 
 ## :question: What is this Repository about?
 
@@ -32,8 +29,151 @@ You will get the answers to the following questions and its respective working c
 - How to use Builder Pattern for test data generation using [Data Faker](https://github.com/datafaker-net/datafaker)?
 - How to write end-to-end api tests?
 - How to write Happy Path scenarios for the APIs?
-- How to write Sad Path scenarios for the APIs? 
+- How to write Sad Path scenarios for the APIs?
 - How to log the Response ?
+
+---
+
+## :wrench: Prerequisites
+
+Make sure the following are installed before running the project:
+
+| Tool | Version | Notes |
+|---|---|---|
+| Java (JDK) | 17+ | Tested with Temurin 17 |
+| Maven | 3.0+ | Required by the enforcer plugin |
+| Docker | Latest | Required to run restful-booker and restful-ecommerce locally |
+| Git | Any | To clone the repository |
+
+---
+
+## :package: Project Structure
+
+```
+api-testing-playwright-java-testng/
+├── src/
+│   ├── main/
+│   │   └── resources/
+│   │       └── log4j2.xml                  # Log4j2 logging configuration
+│   └── test/
+│       └── java/io/github/mfaisalkhatri/api/
+│           ├── logger/
+│           │   └── Logger.java             # Custom response logger (pretty-prints JSON)
+│           ├── manager/
+│           │   └── RequestManager.java     # Playwright APIRequestContext wrapper
+│           ├── reqres/
+│           │   ├── data/                   # EmployeeData POJO + DataFaker builder
+│           │   └── tests/                  # GET/POST/PUT/PATCH/DELETE tests → reqres.in
+│           ├── restfulbooker/
+│           │   ├── data/                   # Booking/Token POJOs + DataFaker builders
+│           │   └── tests/                  # End-to-end booking tests
+│           └── restfulecommerce/
+│               ├── testdata/               # Order/Token POJOs + DataFaker builders
+│               ├── HappyPathTests.java     # Happy path order scenarios
+│               └── SadPathTests.java       # Sad path / negative scenarios
+├── test-suite/
+│   ├── testng.xml                          # Master suite (runs all suites below)
+│   ├── testng-reqres.xml
+│   ├── testng-restfulbooker.xml
+│   ├── testng-restfulecommerce.xml
+│   └── testng-restfulecommerce-*.xml       # Granular ecommerce suites
+├── docker-compose-restfulbooker.yml        # Docker setup for restful-booker (port 3001)
+├── docker-compose-ecommerce.yml            # Docker setup for restful-ecommerce (port 3004)
+└── pom.xml
+```
+
+---
+
+## :rocket: Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/tijonthomas/api-testing-playwright-java-testng.git
+cd api-testing-playwright-java-testng
+```
+
+### 2. Build the project
+
+```bash
+mvn clean install -DskipTests
+```
+
+### 3. Start local services (Docker)
+
+The restful-booker and restful-ecommerce tests run against locally hosted APIs via Docker.
+
+```bash
+# Start restful-booker (runs on http://localhost:3001)
+docker compose -f docker-compose-restfulbooker.yml up -d
+
+# Start restful-ecommerce (runs on http://localhost:3004)
+docker compose -f docker-compose-ecommerce.yml up -d
+```
+
+---
+
+## :test_tube: Running Tests
+
+### Run all tests (all three APIs)
+
+> **Note:** reqres.in requires an API key. Get yours at [reqres.in](https://reqres.in/) and pass it via `-Dapi-key`.
+
+```bash
+mvn clean test -Dapi-key=<YOUR_REQRES_API_KEY>
+```
+
+### Run tests for a specific API
+
+```bash
+# reqres.in tests only
+mvn clean test -Dsuite-xml=test-suite/testng-reqres.xml -Dapi-key=<YOUR_REQRES_API_KEY>
+
+# restful-booker tests only
+mvn clean test -Dsuite-xml=test-suite/testng-restfulbooker.xml
+
+# restful-ecommerce tests only (full suite)
+mvn clean test -Dsuite-xml=test-suite/testng-restfulecommerce.xml
+
+# restful-ecommerce granular suites
+mvn clean test -Dsuite-xml=test-suite/testng-restfulecommerce-postandgetorder.xml
+mvn clean test -Dsuite-xml=test-suite/testng-restfulecommerce-updateorder.xml
+mvn clean test -Dsuite-xml=test-suite/testng-restfulecommerce-partialupdateorder.xml
+mvn clean test -Dsuite-xml=test-suite/testng-restfulecommerce-deleteorders.xml
+```
+
+### Stop local services after testing
+
+```bash
+docker compose -f docker-compose-restfulbooker.yml down
+docker compose -f docker-compose-ecommerce.yml down
+```
+
+---
+
+## :gear: Configuration
+
+| Parameter | How to pass | Used by |
+|---|---|---|
+| `api-key` | `-Dapi-key=<value>` on Maven command | reqres.in tests (`x-api-key` header) |
+| `suite-xml` | `-Dsuite-xml=test-suite/<file>.xml` | Selects which TestNG suite to run (default: `test-suite/testng.xml`) |
+
+In CI, the reqres.in API key is stored as the GitHub Actions secret `REQRES_API_KEY`.
+
+---
+
+## :bar_chart: CI/CD
+
+Tests run automatically on GitHub Actions on every push to `main` or `issue-*` branches and on pull requests targeting `main`.
+
+The pipeline:
+1. Spins up restful-booker and restful-ecommerce via Docker
+2. Builds the project
+3. Runs all tests
+4. Shuts down Docker services
+5. Publishes a test report via [dorny/test-reporter](https://github.com/dorny/test-reporter)
+
+---
 
 ## :writing_hand: Blog Links
 - [What is API Testing?](https://mfaisalkhatri.github.io/2020/08/08/apitesting/)
@@ -45,15 +185,4 @@ You will get the answers to the following questions and its respective working c
 - [How to test DELETE API requests with Playwright Java](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-how-to-test-delete-requests-2ff77feb0383)
 - [How to Create a Custom Logger for Logging Response Details with Playwright Java](https://medium.com/@iamfaisalkhatri/playwright-java-api-testing-creating-custom-logger-for-logging-response-details-771e961d9faa)
 
-## :question: Need Assistance?
 
-- Discuss your queries by writing to me @ `mohammadfaisalkhatri@gmail.com`
-  OR ping me on any of the social media sites using the below link:
-   - [Linktree](https://linktr.ee/faisalkhatri)
-
-## :computer: Paid Trainings
-
-Contact me for Paid trainings related to Test Automation and Software Testing, 
-mail me @ `mohammadfaisalkhatri@gmail.com` or ping me on [LinkedIn](https://www.linkedin.com/in/faisalkhatri/)
-
-## :thought_balloon: Checkout tutorial blogs related to Software Testing on my [Medium](https://medium.com/@iamfaisalkhatri) blog

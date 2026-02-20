@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8"><title>Codebase Explorer</title>
+  <style>
+    body { font: 14px/1.5 system-ui, sans-serif; margin: 0; background: #1a1a2e; color: #eee; }
+    .container { display: flex; height: 100vh; }
+    .sidebar { width: 280px; background: #252542; padding: 20px; border-right: 1px solid #3d3d5c; overflow-y: auto; flex-shrink: 0; }
+    .main { flex: 1; padding: 20px; overflow-y: auto; }
+    h1 { margin: 0 0 10px 0; font-size: 18px; }
+    h2 { margin: 20px 0 10px 0; font-size: 14px; color: #888; text-transform: uppercase; }
+    .stat { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #3d3d5c; }
+    .stat-value { font-weight: bold; }
+    .bar-row { display: flex; align-items: center; margin: 6px 0; }
+    .bar-label { width: 55px; font-size: 12px; color: #aaa; }
+    .bar { height: 18px; border-radius: 3px; }
+    .bar-pct { margin-left: 8px; font-size: 12px; color: #666; }
+    .tree { list-style: none; padding-left: 20px; }
+    details { cursor: pointer; }
+    summary { padding: 4px 8px; border-radius: 4px; }
+    summary:hover { background: #2d2d44; }
+    .folder { color: #ffd700; }
+    .file { display: flex; align-items: center; padding: 4px 8px; border-radius: 4px; }
+    .file:hover { background: #2d2d44; }
+    .size { color: #888; margin-left: auto; font-size: 12px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }
+  </style>
+</head><body>
+  <div class="container">
+    <div class="sidebar">
+      <h1>📊 Summary</h1>
+      <div class="stat"><span>Files</span><span class="stat-value">35</span></div>
+      <div class="stat"><span>Directories</span><span class="stat-value">20</span></div>
+      <div class="stat"><span>Total size</span><span class="stat-value">67.9 KB</span></div>
+      <div class="stat"><span>File types</span><span class="stat-value">5</span></div>
+      <h2>By file type</h2>
+      <div class="bar-row"><span class="bar-label">.java</span><div class="bar" style="width:70.68504570804348%;background:#6b7280"></div><span class="bar-pct">70.7%</span></div><div class="bar-row"><span class="bar-label">.xml</span><div class="bar" style="width:21.86224343126545%;background:#6b7280"></div><span class="bar-pct">21.9%</span></div><div class="bar-row"><span class="bar-label">.md</span><div class="bar" style="width:6.3790030472028985%;background:#083fa1"></div><span class="bar-pct">6.4%</span></div><div class="bar-row"><span class="bar-label">.yml</span><div class="bar" style="width:1.073707813488185%;background:#cb171e"></div><span class="bar-pct">1.1%</span></div><div class="bar-row"><span class="bar-label">.html</span><div class="bar" style="width:0.0%;background:#e34c26"></div><span class="bar-pct">0.0%</span></div>
+    </div>
+    <div class="main">
+      <h1>📁 api-testing-playwright-java-testng</h1>
+      <ul class="tree" id="root"></ul>
+    </div>
+  </div>
+  <script>
+    const data = {"name": "api-testing-playwright-java-testng", "children": [{"name": "codebase-map.html", "size": 0, "ext": ".html"}, {"name": "docker-compose-ecommerce.yml", "size": 368, "ext": ".yml"}, {"name": "docker-compose-restfulbooker.yml", "size": 379, "ext": ".yml"}, {"name": "pom.xml", "size": 6165, "ext": ".xml"}, {"name": "README.md", "size": 4438, "ext": ".md"}, {"name": "src", "children": [{"name": "main", "children": [{"name": "resources", "children": [{"name": "log4j2.xml", "size": 838, "ext": ".xml"}], "size": 838}], "size": 838}, {"name": "test", "children": [{"name": "java", "children": [{"name": "io", "children": [{"name": "github", "children": [{"name": "mfaisalkhatri", "children": [{"name": "api", "children": [{"name": "logger", "children": [{"name": "Logger.java", "size": 1654, "ext": ".java"}], "size": 1654}, {"name": "manager", "children": [{"name": "RequestManager.java", "size": 2535, "ext": ".java"}], "size": 2535}, {"name": "reqres", "children": [{"name": "data", "children": [{"name": "EmployeeData.java", "size": 263, "ext": ".java"}, {"name": "EmployeeDataBuilder.java", "size": 495, "ext": ".java"}], "size": 758}, {"name": "tests", "children": [{"name": "ApiTests.java", "size": 3117, "ext": ".java"}, {"name": "BaseTest.java", "size": 1008, "ext": ".java"}], "size": 4125}], "size": 4883}, {"name": "restfulbooker", "children": [{"name": "data", "children": [{"name": "BookingData.java", "size": 419, "ext": ".java"}, {"name": "BookingDataBuilder.java", "size": 1424, "ext": ".java"}, {"name": "BookingDates.java", "size": 276, "ext": ".java"}, {"name": "PartialBookingData.java", "size": 265, "ext": ".java"}, {"name": "TokenBuilder.java", "size": 347, "ext": ".java"}, {"name": "Tokencreds.java", "size": 277, "ext": ".java"}], "size": 3008}, {"name": "tests", "children": [{"name": "BaseTest.java", "size": 1230, "ext": ".java"}, {"name": "RestfulBookerEndToEndTests.java", "size": 5315, "ext": ".java"}], "size": 6545}], "size": 9553}, {"name": "restfulecommerce", "children": [{"name": "BaseTest.java", "size": 1851, "ext": ".java"}, {"name": "HappyPathTests.java", "size": 11045, "ext": ".java"}, {"name": "SadPathTests.java", "size": 13334, "ext": ".java"}, {"name": "testdata", "children": [{"name": "OrderData.java", "size": 626, "ext": ".java"}, {"name": "OrderDataBuilder.java", "size": 2975, "ext": ".java"}, {"name": "TokenBuilder.java", "size": 494, "ext": ".java"}, {"name": "TokenData.java", "size": 227, "ext": ".java"}], "size": 4322}], "size": 30552}], "size": 49177}], "size": 49177}], "size": 49177}], "size": 49177}], "size": 49177}], "size": 49177}], "size": 50015}, {"name": "test-suite", "children": [{"name": "testng-reqres.xml", "size": 660, "ext": ".xml"}, {"name": "testng-restfulbooker.xml", "size": 830, "ext": ".xml"}, {"name": "testng-restfulecommerce-deleteorders.xml", "size": 652, "ext": ".xml"}, {"name": "testng-restfulecommerce-partialupdateorder.xml", "size": 596, "ext": ".xml"}, {"name": "testng-restfulecommerce-postandgetorder.xml", "size": 577, "ext": ".xml"}, {"name": "testng-restfulecommerce-updateorder.xml", "size": 952, "ext": ".xml"}, {"name": "testng-restfulecommerce.xml", "size": 3580, "ext": ".xml"}, {"name": "testng.xml", "size": 360, "ext": ".xml"}], "size": 8207}], "size": 69572};
+    const colors = {".js": "#f7df1e", ".ts": "#3178c6", ".py": "#3776ab", ".go": "#00add8", ".rs": "#dea584", ".rb": "#cc342d", ".css": "#264de4", ".html": "#e34c26", ".json": "#6b7280", ".md": "#083fa1", ".yaml": "#cb171e", ".yml": "#cb171e", ".mdx": "#083fa1", ".tsx": "#3178c6", ".jsx": "#61dafb", ".sh": "#4eaa25"};
+    function fmt(b) { if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB'; }
+    function render(node, parent) {
+      if (node.children) {
+        const det = document.createElement('details');
+        det.open = parent === document.getElementById('root');
+        det.innerHTML = `<summary><span class="folder">📁 ${node.name}</span><span class="size">${fmt(node.size)}</span></summary>`;
+        const ul = document.createElement('ul'); ul.className = 'tree';
+        node.children.sort((a,b) => (b.children?1:0)-(a.children?1:0) || a.name.localeCompare(b.name));
+        node.children.forEach(c => render(c, ul));
+        det.appendChild(ul);
+        const li = document.createElement('li'); li.appendChild(det); parent.appendChild(li);
+      } else {
+        const li = document.createElement('li'); li.className = 'file';
+        li.innerHTML = `<span class="dot" style="background:${colors[node.ext]||'#6b7280'}"></span>${node.name}<span class="size">${fmt(node.size)}</span>`;
+        parent.appendChild(li);
+      }
+    }
+    data.children.forEach(c => render(c, document.getElementById('root')));
+  </script>
+</body></html>
