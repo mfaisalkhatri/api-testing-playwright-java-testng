@@ -2,7 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="API Test Automation with Playwright">
     <suite-files>
-        <suite-file path="testng-reqres.xml"/>
         <suite-file path="testng-restfulbooker.xml"/>
         <suite-file path="testng-restfulecommerce.xml"/>
     </suite-files>
