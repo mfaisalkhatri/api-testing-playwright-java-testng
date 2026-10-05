@@ -23,7 +23,7 @@
         <jackson-databind-version>2.22.3</jackson-databind-version>
         <log4j-core-version>2.26.1</log4j-core-version>
         <log4j-api-version>2.26.1</log4j-api-version>
-        <commons-lang3-version>3.20.0</commons-lang3-version>
+        <commons-lang3-version>3.21.0</commons-lang3-version>
         <maven-compiler-plugin-version>3.16.0</maven-compiler-plugin-version>
         <maven-surefire-plugin-version>3.5.6</maven-surefire-plugin-version>
         <java-release-version>17</java-release-version>
